@@ -146,11 +146,11 @@ int main()
 
     /// Input file ///
 
-    int Case = 1;  // Case 1 = Ryan, Case 2 = Joel
+    int Case = 2;  // Case 1 = Ryan, Case 2 = Joel
 
     std::string nameOfFile; // Declare the name of the file string
     std::string caseName; // Declare the case name used for the file location
-    const std::string currentVariable = "Order"; // Delcaare the current variable that is changed
+    const std::string currentVariable = "launchLatitude"; // Delcaare the current variable that is changed
 
     /* List of possible variable names
      *
@@ -242,8 +242,8 @@ int main()
 
     const double desiredInclinationDeg =    inputVectorValues(1);
     const double initialAltitude =          inputVectorValues(2);
-    const double initialLatitudeDeg =       inputVectorValues(3);
-    const double initialLongitudeDeg =      inputVectorValues(4);
+//    const double initialLatitudeDeg =       inputVectorValues(3);
+//    const double initialLongitudeDeg =      inputVectorValues(4);
 
     const double FlightPathAngleDeg =       inputVectorValues(5);
 //    const double FlightPathAngleDeg = 89;
@@ -260,7 +260,7 @@ int main()
     const double constantThrustElevationAngle = inputVectorValues(12);
     const double constantThrustAzimuthAngle = inputVectorValues(13);
 
-//    const int maxOrder =                    inputVectorValues(14);
+    const int maxOrder =                    inputVectorValues(14);
 //    const int maxOrder = 20;
 
     const double chosenLocalErrorTolerance = inputVectorValues(15);
@@ -271,16 +271,22 @@ int main()
 
 //    const double setEndTime =               inputVectorValues(17);
 //    const double setEndTime = 20000;        // Case for determination of when zero FPA is reached
-    const double setEndTime = 1796;         // End time for tests for Ryans case 1 (For state accuracy)
+//    const double setEndTime = 1796;         // End time for tests for Ryans case 1 (For state accuracy)
+//    const double setEndTime = 789;          // End time for tests for Ryans case 1 (For state accuracy) for non rotating planet
 //    const double setEndTime = 1543;
 //    const double setEndTime = 1795;
 //    const double setEndTime = 1436;
 //    const double setEndTime = 876;        // End time for tests for Joels case 2
+    const double setEndTime = 783;          // For Latitude
 //    const double setEndTime = 873;
+//    const double setEndTime = 928;          // Time for non rotating planet. Latitude and longitude
 
 
     const double RKFinitiaterTime =         inputVectorValues(18);
+
     const bool rotatingPlanet =             inputVectorValues(19);
+//    const bool rotatingPlanet = false;
+
     const bool GravityAcc =                 inputVectorValues(20);
     const bool ThrustAcc =                  inputVectorValues(21);
     const bool DragAcc =                    inputVectorValues(22);
@@ -306,7 +312,7 @@ int main()
 //*/    //// Order version 1////
 
 
-        //// Order version 2 ////
+/*        //// Order version 2 ////
      //    const std::string currentVariable = "Order";
 //         const int maximumFinalOrder = 32;
 //         const int initialOrder = 5;
@@ -317,7 +323,9 @@ int main()
         const double startOrder = 5.0;
         const double endOrder = 100.0;
 
-         const double numberOfRuns = endOrder-startOrder+1-3; // REMOVE THE -3 AFTER TESTING FOR 25, 27 AND 29!
+        const int removeNumbers = 0;   // REMOVE THE -3 AFTER TESTING FOR 25, 27 AND 29!
+
+         const double numberOfRuns = endOrder-startOrder+1-removeNumbers;
          std::cout<<"Number of runs = "<<numberOfRuns<<std::endl;
 
          Eigen::VectorXd maxOrderVector = Eigen::VectorXd::Zero(numberOfRuns);
@@ -351,19 +359,35 @@ int main()
 //         maxOrderVector(26) = 29;
 //         maxOrderVector(27) = 30;
 
+//         int kk = startOrder;
+//         for (int j = 0; j<numberOfRuns; j++){ // More efficient way to fill the vector
+
+//             if (kk==25 || kk==27 || kk==29){
+//                kk++;
+//                maxOrderVector(j) = kk;
+//                kk++;
+//             }
+//             else {
+//             maxOrderVector(j) = kk;
+//             kk++;
+//             }
+//         }
+
+
          int kk = startOrder;
          for (int j = 0; j<numberOfRuns; j++){ // More efficient way to fill the vector
 
-             if (kk==25 || kk==27 || kk==29){
-                kk++;
-                maxOrderVector(j) = kk;
-                kk++;
-             }
-             else {
+//             if (kk==25 || kk==27 || kk==29){
+//                kk++;
+//                maxOrderVector(j) = kk;
+//                kk++;
+//             }
+//             else {
              maxOrderVector(j) = kk;
              kk++;
-             }
+//             }
          }
+
 
 
 
@@ -384,7 +408,7 @@ int main()
              std::cout<<"Max order = "<<maxOrder<<std::endl;
      //*/    //// Order version 2////
 
-/*      //// Error tolerance ////
+/*     //// Error tolerance ////
 //        const std::string currentVariable = "ErrorTolerance";
 //        const double maximumFinalTolerance = 1e-15;
 //        const double initialTolerance = 1e-5;
@@ -424,15 +448,16 @@ int main()
     //*/    //// Error Tolerance ////
 
 
-/*    //// Initial Altitude ////
+/*   //// Initial Altitude ////
 //    const double numberOfRuns = 3;
 
 
+//    // 3 data points
+//    const double startAltitude = -0.5;
+//    const double endAltitude = 0.5;
+//    const double altitudeStepSize = 0.5;
 
-//    initialAltitudeVector(0) = -0.5;
-//    initialAltitudeVector(1) = 0.0;
-//    initialAltitudeVector(2) = 0.5;
-
+    // complete range
     const double startAltitude = -0.6;
     const double endAltitude = 0.5;
     const double altitudeStepSize = 0.1;
@@ -477,6 +502,23 @@ int main()
     initialPositionMatrix(0,0) = 0.0; // initialLatitudeDeg
     initialPositionMatrix(0,1) = 0.0; // initialLongitudeDeg
 
+//        // Case 1
+//        initialPositionMatrix(1,0) = 30.0;
+//        initialPositionMatrix(1,1) = 0.0;
+
+//        initialPositionMatrix(2,0) = 0.0;
+//        initialPositionMatrix(2,1) = 30.0;
+
+//        initialPositionMatrix(3,0) = 30.0;
+//        initialPositionMatrix(3,1) = 30.0;
+
+//        initialPositionMatrix(4,0) = 45.0;
+//        initialPositionMatrix(4,1) = 45.0;
+
+//        initialPositionMatrix(5,0) = 0.0;
+//        initialPositionMatrix(5,1) = 90.0;
+
+      // Case 2
     initialPositionMatrix(1,0) = -30.0;
     initialPositionMatrix(1,1) = 0.0;
 
@@ -511,26 +553,37 @@ int main()
 
     //*/  //// Initial Position ///
 
-/*
+
     //// Initial Latitude ////
     const double numberOfRuns = 11;
 
     Eigen::VectorXd initialLatitudeVector = Eigen::VectorXd::Zero(numberOfRuns);
 
+//    // Case 1
+//    initialLatitudeVector(0) = 0;
+//    initialLatitudeVector(1) = 10;
+//    initialLatitudeVector(2) = 20;
+//    initialLatitudeVector(3) = 30;
+//    initialLatitudeVector(4) = 40;
+//    initialLatitudeVector(5) = 50;
+//    initialLatitudeVector(6) = 60;
+//    initialLatitudeVector(7) = 70;
+//    initialLatitudeVector(8) = 80;
+//    initialLatitudeVector(9) = 89.9;
+//    initialLatitudeVector(10) = 90;
 
+    // Case 2
     initialLatitudeVector(0) = 0;
-    initialLatitudeVector(1) = 10;
-    initialLatitudeVector(2) = 20;
-    initialLatitudeVector(3) = 30;
-    initialLatitudeVector(4) = 40;
-    initialLatitudeVector(5) = 50;
-    initialLatitudeVector(6) = 60;
-    initialLatitudeVector(7) = 70;
-    initialLatitudeVector(8) = 80;
-    initialLatitudeVector(9) = 89.9;
-    initialLatitudeVector(10) = 90;
-
-
+    initialLatitudeVector(1) = -10;
+    initialLatitudeVector(2) = -20;
+    initialLatitudeVector(3) = -30;
+    initialLatitudeVector(4) = -40;
+    initialLatitudeVector(5) = -50;
+    initialLatitudeVector(6) = -60;
+    initialLatitudeVector(7) = -70;
+    initialLatitudeVector(8) = -80;
+    initialLatitudeVector(9) = -89.9;
+    initialLatitudeVector(10) = -90;
 
     double initialLatitudeDeg = 0; // The actual parameter
     double initialLongitudeDeg = 0; // The actual parameter
@@ -549,17 +602,17 @@ int main()
         std::cout<<"initialLatitudeDeg = "<<initialLatitudeDeg<<std::endl;
 //        std::cout<<"initialLongitudeDeg = "<<initialLongitudeDeg<<std::endl;
 
-    //*/  //// Initial Position ///
+    //*/  //// Initial Latitude ///
 
 
-/*       //// Initial Latitude ////
+ /*     //// Initial Longitude ////
         const double numberOfRuns = 12;
 
         Eigen::VectorXd initialLongitudeVector = Eigen::VectorXd::Zero(numberOfRuns);
 
 
         initialLongitudeVector(0) = 0;
-        initialLongitudeeVector(1) = 30;
+        initialLongitudeVector(1) = 30;
         initialLongitudeVector(2) = 60;
         initialLongitudeVector(3) = 90;
         initialLongitudeVector(4) = 120;
@@ -591,7 +644,7 @@ int main()
             std::cout<<"initialLongitudeDeg = "<<initialLongitudeDeg<<std::endl;
     //        std::cout<<"initialLongitudeDeg = "<<initialLongitudeDeg<<std::endl;
 
-        //*/  //// Initial Position ///
+        //*/  //// Initial Longitude ///
 
 
 /*    //// FPA ////
@@ -599,7 +652,15 @@ int main()
 
            Eigen::VectorXd FPAVector = Eigen::VectorXd::Zero(numberOfRuns);
 
+//           // Case 1
+//           FPAVector(0) = 89;
+//           FPAVector(1) = 88;
+//           FPAVector(2) = 87;
 
+
+
+
+           // Case 2
            FPAVector(0) = 89;
            FPAVector(1) = 88;
            FPAVector(2) = 87;
@@ -631,7 +692,7 @@ int main()
 
            //*/  //// FPA ///
 
-/*    //// Heading angle ////
+ /*   //// Heading angle ////
                const double numberOfRuns = 12;
 
                Eigen::VectorXd headingAngleVector = Eigen::VectorXd::Zero(numberOfRuns);
@@ -723,9 +784,9 @@ int main()
                    //*/  //// Ground velocity ///
 
 
-/*    //// Normal run ////
+ /*  //// Normal run ////
 
-    const double numberOfRuns = 1; // These are the actual number of runs that are done
+    const double numberOfRuns = 500000; // These are the actual number of runs that are done
 
     Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,28); // Creating the output matrix for TSI
     Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,14); // Creating the ouptut matrix for RKF
@@ -815,15 +876,17 @@ int main()
 
     /// Storing the output TSI
 
-//    outputMatrixTSI(run,0) = run+1;
-//    outputMatrixTSI(run,0) = initialLatitudeDeg;
-//    outputMatrixTSI(run,0) = FlightPathAngleDeg;
-//    outputMatrixTSI(run,0) = HeadingAngleDeg;
-//    outputMatrixTSI(run,0) = initialGroundVelocity;
-    outputMatrixTSI(run,0) = maxOrder;
+
+//    outputMatrixTSI(run,0) = maxOrder;
 //    outputMatrixTSI(run,0) = chosenLocalErrorTolerance;
 //    outputMatrixTSI(run,0) = initialAltitude;
-//    outputMatrixTSI(run,1) = initialLongitudeDeg;
+        outputMatrixTSI(run,0) = initialLatitudeDeg;
+//        outputMatrixTSI(run,0) = FlightPathAngleDeg;
+//        outputMatrixTSI(run,0) = HeadingAngleDeg;
+    //    outputMatrixTSI(run,0) = initialGroundVelocity;
+//            outputMatrixTSI(run,0) = run+1;
+
+        outputMatrixTSI(run,1) = initialLongitudeDeg;
 
     outputMatrixTSI(run,2) = outputMatrix(3,0); // CPU time TSI
     outputMatrixTSI(run,3) = outputMatrix(3,1); // Wall time TSI

@@ -45,7 +45,7 @@ currentVariableFolder = 'Position';
 
 
 currentVariableUnit = '[-]';
-currentCaseFolder = 'Case2';
+currentCaseFolder = 'Case1';
 filePref = 0; % Choose a different file from the last one. So if this number is 1, you choose the penultimate file etc.
 
 % Automatic latest file name (Source:
