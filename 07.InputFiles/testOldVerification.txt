@@ -1,0 +1,25 @@
+Test case from Woolley 2015 (case 10 SSTO)
+desiredOrbitalAltitude 		= 320.0
+desiredInclinationDeg 		= 45.0
+initialAltitude 		= -0.6
+initialLatitudeDeg 		= 21.0
+initialLongitudeDeg 		= 74.5
+FlightPathAngleDeg 		= 89.0
+HeadingAngleDeg 		= 90.0
+initialGroundVelocity 		= 0.00001
+massMAV 			= 227.0
+thrust 				= 5.0
+specificImpulse 		= 328.6
+initialBurnTime 		= 142.5
+constantThrustElevationAngle	= -0.184
+constantThrustAzimuthAngle	= -0.299
+maxOrder 			= 20
+chosenLocalErrorTolerance 	= 1e-15
+chosenStepSize 			= 0.01
+setEndTime 			= 2000.0
+RKFinitiaterTime 		= 1.0
+rotatingPlanet 			= 1
+Gravity 			= 1
+Thrust 				= 1
+Drag 				= 1
+comparison 			= 1

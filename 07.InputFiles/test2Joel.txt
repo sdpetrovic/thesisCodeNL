@@ -1,0 +1,25 @@
+Test case from Joel (hybrid) case7_3_2016_v33
+desiredOrbitalAltitude 		= 479.19000000064
+desiredInclinationDeg 		= 92.6899999999988
+initialAltitude 		= -0.6
+initialLatitudeDeg 		= 0.0
+initialLongitudeDeg 		= 90.0
+FlightPathAngleDeg 		= 89.0
+HeadingAngleDeg 		= 90.0
+initialGroundVelocity 		= 0.000001
+massMAV 			= 288.95985303149
+thrust 				= 6.01868886452604
+specificImpulse 		= 315.9
+initialBurnTime 		= 99.361911852794
+constantThrustElevationAngle	= -0.674
+constantThrustAzimuthAngle	= 0.7273
+maxOrder 			= 20
+chosenLocalErrorTolerance 	= 1e-15
+chosenStepSize			= 0.01
+setEndTime 			= 2000.0
+RKFinitiaterTime 		= 1.0
+rotatingPlanet 			= 1
+Gravity 			= 1
+Thrust 				= 1
+Drag 				= 1
+comparison 			= 1
