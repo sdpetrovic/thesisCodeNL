@@ -146,11 +146,11 @@ int main()
 
     /// Input file ///
 
-    int Case = 2;  // Case 1 = Ryan, Case 2 = Joel
+    int Case = 1;  // Case 1 = Ryan, Case 2 = Joel
 
     std::string nameOfFile; // Declare the name of the file string
     std::string caseName; // Declare the case name used for the file location
-    const std::string currentVariable = "launchLatitude"; // Delcaare the current variable that is changed
+    const std::string currentVariable = "Order"; // Delcaare the current variable that is changed
 
     /* List of possible variable names
      *
@@ -242,8 +242,8 @@ int main()
 
     const double desiredInclinationDeg =    inputVectorValues(1);
     const double initialAltitude =          inputVectorValues(2);
-//    const double initialLatitudeDeg =       inputVectorValues(3);
-//    const double initialLongitudeDeg =      inputVectorValues(4);
+    const double initialLatitudeDeg =       inputVectorValues(3);
+    const double initialLongitudeDeg =      inputVectorValues(4);
 
     const double FlightPathAngleDeg =       inputVectorValues(5);
 //    const double FlightPathAngleDeg = 89;
@@ -260,7 +260,7 @@ int main()
     const double constantThrustElevationAngle = inputVectorValues(12);
     const double constantThrustAzimuthAngle = inputVectorValues(13);
 
-    const int maxOrder =                    inputVectorValues(14);
+//    const int maxOrder =                    inputVectorValues(14);
 //    const int maxOrder = 20;
 
     const double chosenLocalErrorTolerance = inputVectorValues(15);
@@ -270,14 +270,20 @@ int main()
 
 
 //    const double setEndTime =               inputVectorValues(17);
+
 //    const double setEndTime = 20000;        // Case for determination of when zero FPA is reached
+
+
 //    const double setEndTime = 1796;         // End time for tests for Ryans case 1 (For state accuracy)
 //    const double setEndTime = 789;          // End time for tests for Ryans case 1 (For state accuracy) for non rotating planet
 //    const double setEndTime = 1543;
 //    const double setEndTime = 1795;
 //    const double setEndTime = 1436;
+    const double setEndTime = 25;           // End time to determine error in order
+
+
 //    const double setEndTime = 876;        // End time for tests for Joels case 2
-    const double setEndTime = 783;          // For Latitude
+//    const double setEndTime = 783;          // For Latitude
 //    const double setEndTime = 873;
 //    const double setEndTime = 928;          // Time for non rotating planet. Latitude and longitude
 
@@ -294,25 +300,26 @@ int main()
 
     //////////// Variables for storing of the data /////////////////
 
-/*   //// Order version 1 ////
+ /*  //// Order version 1 ////
 //    const std::string currentVariable = "Order";
-    const int maximumFinalOrder = 32;
-    const int initialOrder = 5;
-    const int orderStepSize = 1;
-    const double numberOfRuns = (maximumFinalOrder+1-initialOrder)/orderStepSize; // Number of runs that order will be changed and evaluated
-    Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,26); // Creating the output matrix for TSI
-    Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,12); // Creating the ouptut matrix for RKF
+    const int maximumFinalOrder = 29;
+    const int initialOrder = 21;
+    const int orderStepSize = 2;
+//    const double numberOfRuns = (maximumFinalOrder+1-initialOrder)/orderStepSize; // Number of runs that order will be changed and evaluated
+    const double numberOfRuns = (maximumFinalOrder-initialOrder)/orderStepSize+1;
+    Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,28); // Creating the output matrix for TSI
+    Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,14); // Creating the ouptut matrix for RKF
     int run = 0;    // Initual run counter to be used in the storing of the output
 
 
     /// For loop ///
 
-    for (int maxOrder = initialOrder; maxOrder<maximumFinalOrder; maxOrder = maxOrder+orderStepSize){
+    for (int maxOrder = initialOrder; maxOrder<maximumFinalOrder+1; maxOrder = maxOrder+orderStepSize){
         std::cout<<"Max order = "<<maxOrder<<std::endl;
 //*/    //// Order version 1////
 
 
-/*        //// Order version 2 ////
+ /*       //// Order version 2 ////
      //    const std::string currentVariable = "Order";
 //         const int maximumFinalOrder = 32;
 //         const int initialOrder = 5;
@@ -554,7 +561,7 @@ int main()
     //*/  //// Initial Position ///
 
 
-    //// Initial Latitude ////
+/*    //// Initial Latitude ////
     const double numberOfRuns = 11;
 
     Eigen::VectorXd initialLatitudeVector = Eigen::VectorXd::Zero(numberOfRuns);
@@ -784,9 +791,10 @@ int main()
                    //*/  //// Ground velocity ///
 
 
- /*  //// Normal run ////
+  //// Normal run ////
 
-    const double numberOfRuns = 500000; // These are the actual number of runs that are done
+    const double numberOfRuns = 1; // These are the actual number of runs that are done
+    const double maxOrder = 20;
 
     Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,28); // Creating the output matrix for TSI
     Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,14); // Creating the ouptut matrix for RKF
@@ -877,16 +885,16 @@ int main()
     /// Storing the output TSI
 
 
-//    outputMatrixTSI(run,0) = maxOrder;
+    outputMatrixTSI(run,0) = maxOrder;
 //    outputMatrixTSI(run,0) = chosenLocalErrorTolerance;
 //    outputMatrixTSI(run,0) = initialAltitude;
-        outputMatrixTSI(run,0) = initialLatitudeDeg;
+//        outputMatrixTSI(run,0) = initialLatitudeDeg;
 //        outputMatrixTSI(run,0) = FlightPathAngleDeg;
 //        outputMatrixTSI(run,0) = HeadingAngleDeg;
     //    outputMatrixTSI(run,0) = initialGroundVelocity;
 //            outputMatrixTSI(run,0) = run+1;
 
-        outputMatrixTSI(run,1) = initialLongitudeDeg;
+//        outputMatrixTSI(run,1) = initialLongitudeDeg;
 
     outputMatrixTSI(run,2) = outputMatrix(3,0); // CPU time TSI
     outputMatrixTSI(run,3) = outputMatrix(3,1); // Wall time TSI
@@ -958,7 +966,7 @@ int main()
 
     /// Storing the output in a .csv file
     // Set directory where output files will be stored. THIS REQUIRES THE COMPLETE PATH IN ORDER TO WORK!!
-    const std::string outputDirectoryTSI = "/home/stachap/Documents/Thesis/03. Tudat/tudatBundle/tudatApplications/thesisProject/04.VerificationAndValidation/04.DifferentVariables/TSI/" + currentVariable + "/" + caseName + "/";
+    const std::string outputDirectoryTSI = "/home/stachap/Documents/Thesis/03. Tudat/tudatBundle/tudatApplications/thesisProject/04.VerificationAndValidation/04.DifferentVariables/TSI/" + currentVariable + "/" + caseName + "/issue/";
 
     // Set output format for matrix output.
     Eigen::IOFormat csvFormatTSI( 15, 0, ", ", "\n" );
@@ -1086,7 +1094,7 @@ std::string dataAbsolutePathTSI = outputDirectoryTSI + newFileName;
 
     /// Storing the output in a .csv file
     // Set directory where output files will be stored. THIS REQUIRES THE COMPLETE PATH IN ORDER TO WORK!!
-    const std::string outputDirectoryRKF = "/home/stachap/Documents/Thesis/03. Tudat/tudatBundle/tudatApplications/thesisProject/04.VerificationAndValidation/04.DifferentVariables/RKF/" + currentVariable + "/" + caseName + "/";
+    const std::string outputDirectoryRKF = "/home/stachap/Documents/Thesis/03. Tudat/tudatBundle/tudatApplications/thesisProject/04.VerificationAndValidation/04.DifferentVariables/RKF/" + currentVariable + "/" + caseName + "/issue/";
 
     // Set output format for matrix output.
     Eigen::IOFormat csvFormatRKF( 15, 0, ", ", "\n" );
