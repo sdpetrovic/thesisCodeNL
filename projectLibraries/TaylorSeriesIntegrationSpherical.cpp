@@ -285,7 +285,7 @@ Eigen::VectorXd performTaylorSeriesIntegrationStep(const celestialBody& planet_,
  //*/       /// End debug ///
 
         /// Uncomment the line below if you want the Taylor coefficients to be stored
-/*        // Set directory where output files will be stored. THIS REQUIRES THE COMPLETE PATH IN ORDER TO WORK!!
+        // Set directory where output files will be stored. THIS REQUIRES THE COMPLETE PATH IN ORDER TO WORK!!
         const std::string outputDirectory = "/home/stachap/Documents/Thesis/03. Tudat/tudatBundle/tudatApplications/thesisProject/02.taylorSeriesCoefficientsOutputFolder/";
 
 
@@ -443,6 +443,7 @@ Eigen::VectorXd performTaylorSeriesIntegrationStep(const celestialBody& planet_,
 
         for (int k = 0; k<maxOrder+1;k++){                      // Taylor series summation
 
+
             updatedState(n) += TaylorCoefficients((n+1),k)*pow(currentStepSize,k);      // Perform one step of the taylor series expansion and then add it to the previous step
 
 //            if (n==6){
@@ -596,6 +597,8 @@ else{
 
 //std::cout<<"////////////////////////////////////////////////////////////////////////////////// Beginning of altitude do-loop //////////////////////////////////////////////////////////////////////////////////"<<std::endl;
 
+
+
 //std::cout<<"Initial new altitude = "<<newAltitude<<std::endl;
 
         do{ // If the altitude has gone beyond the limit altitude, this do loop will determine a new "currentStepSize"
@@ -611,6 +614,7 @@ else{
             altitudeAccept = true;
 }
         else{
+//
             // Compute an updated time step //
 
             fFromDot = 0.0; // Reset
@@ -919,6 +923,7 @@ else{
 
 //    std::cout<<"////////////////////////////////////////////////////////////////////////////////// Beginning of Mach do-loop //////////////////////////////////////////////////////////////////////////////////"<<std::endl;
 
+
 //     std::cout<<"InitialNewMachNumber = "<<newMach<<std::endl;
 
     do{ // If the Mach number has gone beyond the limit Mach number, this do loop will determine a new "currentStepSize"
@@ -926,6 +931,7 @@ else{
 //         std::cout<<"newMach-limitMach = "<<newMach-limitMach<<std::endl;
 //         std::cout<<"newMach = "<<newMach<<std::endl;
 //         std::cout<<"limitMach = "<<limitMach<<std::endl;
+
 
 
     if (newMach - limitMach <= 1e-6 && newMach - limitMach >= -1e-15){   // Checking if the convergence condition has been met and an answer has been found

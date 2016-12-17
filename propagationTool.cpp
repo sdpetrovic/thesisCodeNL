@@ -279,7 +279,7 @@ int main()
 //    const double setEndTime = 1543;
 //    const double setEndTime = 1795;
 //    const double setEndTime = 1436;
-    const double setEndTime = 25;           // End time to determine error in order
+//    const double setEndTime = 189;           // End time to determine error in order
 
 
 //    const double setEndTime = 876;        // End time for tests for Joels case 2
@@ -297,6 +297,17 @@ int main()
     const bool ThrustAcc =                  inputVectorValues(21);
     const bool DragAcc =                    inputVectorValues(22);
     const bool comparison =                 inputVectorValues(23);
+
+
+    std::string rotOrNot; // Define the folder, either rotating Mars or not
+
+    if (rotatingPlanet == true){
+        rotOrNot = "rotatingMars";
+    }
+    else if (rotatingPlanet == false){
+        rotOrNot = "nonRotatingMars";
+    }
+
 
     //////////// Variables for storing of the data /////////////////
 
@@ -793,14 +804,29 @@ int main()
 
   //// Normal run ////
 
-    const double numberOfRuns = 1; // These are the actual number of runs that are done
-    const double maxOrder = 20;
+    const double numberOfRuns = 6; // These are the actual number of runs that are done
+    const double maxOrder = 30;
+
+    Eigen::VectorXd differentEndTimes = Eigen::VectorXd::Zero(numberOfRuns);
+
+    int kk = 15;
+    for (int j = 0; j<numberOfRuns; j++){ // More efficient way to fill the vector
+
+        differentEndTimes(j) = kk;
+        kk = kk+1;
+
+    }
+
+
+    double setEndTime = 0; // The actual parameter
 
     Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,28); // Creating the output matrix for TSI
     Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,14); // Creating the ouptut matrix for RKF
     int run = 0;    // Initual run counter to be used in the storing of the output
 
     for (int i = 0; i<numberOfRuns; i++){
+        setEndTime = differentEndTimes(i);
+        std::cout<<"setEndTime = "<<setEndTime<<std::endl;
 
 
  //*/   //// Normal run ////
@@ -966,7 +992,7 @@ int main()
 
     /// Storing the output in a .csv file
     // Set directory where output files will be stored. THIS REQUIRES THE COMPLETE PATH IN ORDER TO WORK!!
-    const std::string outputDirectoryTSI = "/home/stachap/Documents/Thesis/03. Tudat/tudatBundle/tudatApplications/thesisProject/04.VerificationAndValidation/04.DifferentVariables/TSI/" + currentVariable + "/" + caseName + "/issue/";
+    const std::string outputDirectoryTSI = "/home/stachap/Documents/Thesis/03. Tudat/tudatBundle/tudatApplications/thesisProject/04.VerificationAndValidation/04.DifferentVariables/" + rotOrNot + "/TSI/" + currentVariable + "/" + caseName + "/issue/";
 
     // Set output format for matrix output.
     Eigen::IOFormat csvFormatTSI( 15, 0, ", ", "\n" );
@@ -1094,7 +1120,7 @@ std::string dataAbsolutePathTSI = outputDirectoryTSI + newFileName;
 
     /// Storing the output in a .csv file
     // Set directory where output files will be stored. THIS REQUIRES THE COMPLETE PATH IN ORDER TO WORK!!
-    const std::string outputDirectoryRKF = "/home/stachap/Documents/Thesis/03. Tudat/tudatBundle/tudatApplications/thesisProject/04.VerificationAndValidation/04.DifferentVariables/RKF/" + currentVariable + "/" + caseName + "/issue/";
+    const std::string outputDirectoryRKF = "/home/stachap/Documents/Thesis/03. Tudat/tudatBundle/tudatApplications/thesisProject/04.VerificationAndValidation/04.DifferentVariables/" + rotOrNot + "/RKF/" + currentVariable + "/" + caseName + "/issue/";
 
     // Set output format for matrix output.
     Eigen::IOFormat csvFormatRKF( 15, 0, ", ", "\n" );

@@ -555,7 +555,7 @@ std::cout<<setprecision(15)<<"Setting output precision to 15"<<std::endl;
         exportFile1Cart.close( );   // Close the file
     };
 
-
+//*/
     // Define storing matrix for the intermediate values
     Eigen::MatrixXd dataStoringMatrixTSI(1,8); // The size of this matrix will change in the do-loop
     Eigen::MatrixXd dataStoringMatrixTSICartesian(1,8); // The size of this matrix will change in the do-loop
@@ -883,6 +883,8 @@ std::cout<<setprecision(15)<<"Setting output precision to 15"<<std::endl;
 
 std::cout<<"////////////////////////////////////////////////////////////////// Start of TSI //////////////////////////////////////////////////////////////////"<<std::endl;
 
+//const double constantStepSize = 1.0; /// Constant step-size used to find error in order 29 for case 1 rotating Mars /// USED TO DETERMINE ERROR IN ORDER 29!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 
         StepSize stepSize; // Initializing the stepSize class. THIS SHOULD BE DONE BEFORE THE START OF THE INTEGRATION!!!!!
 
@@ -956,6 +958,9 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 //         std::cout<<"runningTimeTSI = "<<runningTimeTSI<<std::endl;
 
          if (coast == true && runningTimeTSI < coastStartTime){
+//             std::cout<<"This should also be happening all the time!"<<std::endl;
+//             stepSize.setCurrentStepSize(constantStepSize); /// USED TO DETERMINE ERROR IN ORDER 29!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
              if ( std::fabs( coastStartTime - runningTimeTSI )
                                       <= std::fabs( stepSize.getCurrentStepSize() ) * ( 1.0 + std::numeric_limits< double >::epsilon( ) ) )
                                  {
@@ -965,12 +970,14 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 //                                     std::cout<<"This should only happen once! And the stepSize = "<<stepSize.getCurrentStepSize()<<std::endl;
 
                                  }
-//             std::cout<<"This should be happening all the time!"<<std::endl;
+             std::cout<<"This should be happening all the time!"<<std::endl;
 
          } // if coast
          else {
+//             stepSize.setCurrentStepSize(constantStepSize); /// USED TO DETERMINE ERROR IN ORDER 29!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-//              std::cout<<"Current stepSize = "<<stepSize.getCurrentStepSize()<<std::endl;
+              std::cout<<"Current stepSize  coast = "<<stepSize.getCurrentStepSize()<<std::endl;
+              std::cout<<"Updated time coast = "<<runningTimeTSI+stepSize.getCurrentStepSize()<<std::endl;
 //              std::cout<<"endTimeTSI-runningTimeTSI = "<<fabs(endTimeTSI-runningTimeTSI)<<std::endl;
 
     if ( std::fabs( endTimeTSI - runningTimeTSI )
@@ -982,8 +989,9 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 
 } // if not coast
 
-//          std::cout<<"Current stepSize = "<<stepSize.getCurrentStepSize()<<std::endl;
-//          std::cout<<"Updated time = "<<runningTimeTSI+stepSize.getCurrentStepSize()<<std::endl;
+
+          std::cout<<"Current stepSize thrust = "<<stepSize.getCurrentStepSize()<<std::endl;
+          std::cout<<"Updated time thrust = "<<runningTimeTSI+stepSize.getCurrentStepSize()<<std::endl;
 
         Eigen::VectorXd updatedStateAndTimeVector = performTaylorSeriesIntegrationStep(Mars, MAV, currentSphericalStateAndTime, stepSize, maxOrder, FlightPathAngle, HeadingAngle); /// The actual integration step
         // This function has the output: updated position, updated velocity, updated mass and updated time
@@ -1151,7 +1159,7 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 
         /// Adding the values to the file ///
 
-        // Check if the file already exists.
+        // Storing the data and check if the file already exists.
 
 
         std::ifstream ifile2TSI(dataAbsolutePathTSI.c_str()); // Check it as an input file
@@ -1206,7 +1214,7 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 
             std::cerr<<"Error: values could not be stored because storage file does not exist"<<std::endl;
         };
-
+//*/
         std::cout<<"The TSI final state = "<<currentStateAndTime.getCurrentState()<<std::endl;
         std::cout<<"The final time ="<<currentStateAndTime.getCurrentTime()<<std::endl;
         std::cout<<"countTSI = "<<countTSI<<std::endl;
@@ -1436,7 +1444,7 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
                             exportFile1Spherical.close( );   // Close the file
                         };
 
-
+//*/
 
                     /// Testing with the state derivative function class
 
@@ -2032,7 +2040,7 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 
  } // End of coasting phase
 
-                    /// Storing the values to the file ///
+                    /// Storing the data values to the file ///
 
 //                    std::cout<<"It goes here"<<std::endl;
 
@@ -2091,7 +2099,7 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
                     };
 
 
-
+//*/
 
 
 
