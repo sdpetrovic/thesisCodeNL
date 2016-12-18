@@ -285,7 +285,7 @@ Eigen::VectorXd performTaylorSeriesIntegrationStep(const celestialBody& planet_,
  //*/       /// End debug ///
 
         /// Uncomment the line below if you want the Taylor coefficients to be stored
-        // Set directory where output files will be stored. THIS REQUIRES THE COMPLETE PATH IN ORDER TO WORK!!
+  /*      // Set directory where output files will be stored. THIS REQUIRES THE COMPLETE PATH IN ORDER TO WORK!!
         const std::string outputDirectory = "/home/stachap/Documents/Thesis/03. Tudat/tudatBundle/tudatApplications/thesisProject/02.taylorSeriesCoefficientsOutputFolder/";
 
 

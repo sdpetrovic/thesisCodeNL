@@ -423,7 +423,7 @@ std::cout<<setprecision(15)<<"Setting output precision to 15"<<std::endl;
     outputVectorTSICartesian(0,6) = initialStateTSICartesian(5);   // Storing the initial z velocity
     outputVectorTSICartesian(0,7) = initialStateTSICartesian(6);   // Storing the initial MAV mass
 
-    // Storing the data
+    /* // Storing the data
 
     std::ifstream ifileTSI(dataAbsolutePathTSI.c_str()); // Check it as an input file
 
@@ -970,14 +970,14 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 //                                     std::cout<<"This should only happen once! And the stepSize = "<<stepSize.getCurrentStepSize()<<std::endl;
 
                                  }
-             std::cout<<"This should be happening all the time!"<<std::endl;
+//             std::cout<<"This should be happening all the time!"<<std::endl;
 
          } // if coast
          else {
 //             stepSize.setCurrentStepSize(constantStepSize); /// USED TO DETERMINE ERROR IN ORDER 29!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-              std::cout<<"Current stepSize  coast = "<<stepSize.getCurrentStepSize()<<std::endl;
-              std::cout<<"Updated time coast = "<<runningTimeTSI+stepSize.getCurrentStepSize()<<std::endl;
+//              std::cout<<"Current stepSize  coast = "<<stepSize.getCurrentStepSize()<<std::endl;
+//              std::cout<<"Updated time coast = "<<runningTimeTSI+stepSize.getCurrentStepSize()<<std::endl;
 //              std::cout<<"endTimeTSI-runningTimeTSI = "<<fabs(endTimeTSI-runningTimeTSI)<<std::endl;
 
     if ( std::fabs( endTimeTSI - runningTimeTSI )
@@ -990,8 +990,8 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 } // if not coast
 
 
-          std::cout<<"Current stepSize thrust = "<<stepSize.getCurrentStepSize()<<std::endl;
-          std::cout<<"Updated time thrust = "<<runningTimeTSI+stepSize.getCurrentStepSize()<<std::endl;
+//          std::cout<<"Current stepSize thrust = "<<stepSize.getCurrentStepSize()<<std::endl;
+//          std::cout<<"Updated time thrust = "<<runningTimeTSI+stepSize.getCurrentStepSize()<<std::endl;
 
         Eigen::VectorXd updatedStateAndTimeVector = performTaylorSeriesIntegrationStep(Mars, MAV, currentSphericalStateAndTime, stepSize, maxOrder, FlightPathAngle, HeadingAngle); /// The actual integration step
         // This function has the output: updated position, updated velocity, updated mass and updated time
@@ -1159,7 +1159,7 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 
         /// Adding the values to the file ///
 
-        // Storing the data and check if the file already exists.
+        /* // Storing the data and check if the file already exists.
 
 
         std::ifstream ifile2TSI(dataAbsolutePathTSI.c_str()); // Check it as an input file
@@ -1309,7 +1309,7 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 
 
 
-                        // Storing the data
+                        /* // Storing the data
 
                         std::ifstream ifile(dataAbsolutePath.c_str()); // Check it as an input file
 //                        std::ifstream ifileSpherical(dataAbsolutePathSpherical.c_str()); // Check it as an input file
@@ -2040,7 +2040,7 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 
  } // End of coasting phase
 
-                    /// Storing the data values to the file ///
+                    /* // Storing the data values to the file ///
 
 //                    std::cout<<"It goes here"<<std::endl;
 
