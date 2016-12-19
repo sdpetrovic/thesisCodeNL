@@ -45,7 +45,7 @@ currentVariableFolder = 'ErrorTolerance';
 
 
 currentVariableUnit = '[-]';
-currentCaseFolder = 'Case1';
+currentCaseFolder = 'Case2';
 filePref = 0; % Choose a different file from the last one. So if this number is 1, you choose the penultimate file etc.
 
 

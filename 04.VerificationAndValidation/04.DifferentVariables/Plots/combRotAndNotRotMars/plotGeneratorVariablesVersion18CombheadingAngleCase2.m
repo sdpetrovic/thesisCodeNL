@@ -5,7 +5,7 @@
 %
 % Stacha Petrovic 15-12-2016
 % 
-% version 12
+% version 18
 % 
 % Linux Ubuntu 16.04 LTS
 %
@@ -27,7 +27,7 @@ tic
 
 pathToValidationFolder = '/home/stachap/Documents/Thesis/03. Tudat/tudatBundle/tudatApplications/thesisProject/04.VerificationAndValidation/04.DifferentVariables/';
 
-currentVariableFolder = 'ErrorTolerance';
+currentVariableFolder = 'headingAngle';
 
 %     /* List of possible variable names
 %      *
@@ -45,9 +45,8 @@ currentVariableFolder = 'ErrorTolerance';
 
 
 currentVariableUnit = '[-]';
-currentCaseFolder = 'Case1';
+currentCaseFolder = 'Case2';
 filePref = 0; % Choose a different file from the last one. So if this number is 1, you choose the penultimate file etc.
-
 
 % Automatic latest file name (Source:
 % https://www.youtube.com/watch?v=D8UkAOhsyDI)
@@ -173,9 +172,12 @@ yVelocityTSI = VariableVectorTSI(:,11); % y-velocity TSI [km/s]
 zVelocityTSI = VariableVectorTSI(:,12); % z-velocity TSI [km/s]
 MassTSI = VariableVectorTSI(:,13); % Mass TSI [kg]
 
+% Required propellant mass to circularize and reach desired inclination
+propMassTSI = VariableVectorTSI(:,28); % TSI required propellant mass [kg]
+
 
 % Accuracy of the results and speed of convergence
-TruthTSI = VariableVectorTSI(end,7:13);
+TruthTSI = VariableVectorTSI(1,7:13);
 % TruthTSI = VariableVectorRKF((find(VariableVectorRKF(:,1)==20)),7:13);
 
 % Difference in metres w.r.t. the order 20 end state
@@ -231,7 +233,7 @@ end
 %% Evaluations per currentVariable and end state
 
 figure(1) % CPU time
-semilogx(currentVariable,cpuTimeTSI);
+scatter(currentVariable,cpuTimeTSI);
 hold on
 
 title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
@@ -248,12 +250,11 @@ ylabel('CPU time TSI [sec]');
 
 
 % legend('CPU time','Location','NorthEastOutside'); % Add a legend in the top right corner
-
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 figure(2) % Wall time
-semilogx(currentVariable,wallTimeTSI);
+plot(currentVariable,wallTimeTSI);
 hold on
 
 title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
@@ -269,12 +270,11 @@ ylabel('Wall time TSI [sec]');
 % case 2
 
 % legend('Wall time','Location','NorthEastOutside'); % Add a legend in the top right corner
-
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 figure(3) % Position
-semilogx(currentVariable,xPositionTSI)
+plot(currentVariable,xPositionTSI)
 hold on
 
 title(['x-Position vs ',currentVariableFolder]); % Give the figure a title
@@ -304,17 +304,16 @@ dummyVector(pos) = [];  % Delete the outliers
 Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
 STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
 
-% axis([currentVariable(end) currentVariable(1) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
+% axis([min(currentVariable) max(currentVariable) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
+legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 
 
 % legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
 
-legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
-set(gca,'FontSize',14);  % Make sure that the graph font size is 14
-
 figure(4)
-semilogx(currentVariable,yPositionTSI)
+plot(currentVariable,yPositionTSI)
 hold on
 
 title(['y-Position vs ',currentVariableFolder]); % Give the figure a title
@@ -344,14 +343,14 @@ dummyVector(pos) = [];  % Delete the outliers
 Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
 STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
 
-% axis([currentVariable(end) currentVariable(1) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-% legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
+% axis([min(currentVariable) max(currentVariable) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
+% legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
+
 figure(5)
-semilogx(currentVariable,zPositionTSI)
+plot(currentVariable,zPositionTSI)
 hold on
 
 title(['z-Position vs ',currentVariableFolder]); % Give the figure a title
@@ -381,14 +380,14 @@ dummyVector(pos) = [];  % Delete the outliers
 Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
 STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
 
-% axis([currentVariable(end) currentVariable(1) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-% legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
+% axis([min(currentVariable) max(currentVariable) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
+% legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
+
 figure(6) % Velocity
-semilogx(currentVariable,xVelocityTSI)
+plot(currentVariable,xVelocityTSI)
 hold on
 % plot(currentVariable,yVelocityTSI)
 % hold on
@@ -421,14 +420,14 @@ dummyVector(pos) = [];  % Delete the outliers
 Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
 STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
 
-% axis([currentVariable(end) currentVariable(1) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-% legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+% axis([min(currentVariable) max(currentVariable) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
+% legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+
 figure(7)
-semilogx(currentVariable,yVelocityTSI)
+plot(currentVariable,yVelocityTSI)
 hold on
 
 title(['y-Velocity vs ',currentVariableFolder]); % Give the figure a title
@@ -458,14 +457,14 @@ dummyVector(pos) = [];  % Delete the outliers
 Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
 STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
 
-% axis([currentVariable(end) currentVariable(1) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-% legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+% axis([min(currentVariable) max(currentVariable) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
+% legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+
 figure(8)
-semilogx(currentVariable,zVelocityTSI)
+plot(currentVariable,zVelocityTSI)
 hold on
 
 title(['z-Velocity vs ',currentVariableFolder]); % Give the figure a title
@@ -495,15 +494,15 @@ dummyVector(pos) = [];  % Delete the outliers
 Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
 STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
 
-% axis([currentVariable(end) currentVariable(1) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-% legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+% axis([min(currentVariable) max(currentVariable) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
+% legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+
 
 figure(9)
-semilogx(currentVariable,functionEvaluationsTSI)
+plot(currentVariable,functionEvaluationsTSI)
 hold on
 
 title(['Function evaluations vs ',currentVariableFolder]); % Give the figure a title
@@ -533,90 +532,103 @@ dummyVector(pos) = [];  % Delete the outliers
 Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
 STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
 
-% axis([currentVariable(end) currentVariable(1) 0 Meanadj+3*STDadj]) % Zoom
+% axis([currentVariable(1) currentVariable(end) 0 Meanadj+3*STDadj]) % Zoom
 % axis([currentVariable(1) currentVariable(end) 0 100]) % Zoom
+legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
+% ybounds = ylim();
+% set(gca, 'ytick', ybounds(1):1:ybounds(2));
 
 
 figure(10)
-semilogx(functionEvaluationsTSI,cpuTimeTSI)
+scatter(functionEvaluationsTSI,cpuTimeTSI)
 hold on
+myPoly = polyfit(functionEvaluationsTSI,cpuTimeTSI,3);
+polyRange = min(functionEvaluationsTSI):1:max(functionEvaluationsTSI);
+polyvalNumber = polyval(myPoly,polyRange);
+hold on
+
+% plot(polyRange,polyvalNumber)
+
+% plot(functionEvaluationsTSI,cpuTimeTSI)
 
 title(['Function evaluations vs CPU time TSI']); % Give the figure a title
 xlabel('Function evaluations [-]');
 ylabel('CPU time TSI [sec]'); % Label the different axes
 
+% xbounds = xlim();
+% set(gca, 'xtick', xbounds(1):1:xbounds(2));
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 
-% axis([min(functionEvaluationsTSI)-5 100 0.05 0.09]) % Zoom
+
+% axis([min(functionEvaluationsTSI)-5 100 min(cpuTimeTSI) max(cpuTimeTSI)]) % Zoom
 
 %% Speed of convergence and accuracy
 
 figure(11)
-loglog(currentVariable,xPositionTSIdifference)
+semilogy(currentVariable,xPositionTSIdifference)
 hold on
-loglog(currentVariable,yPositionTSIdifference)
+semilogy(currentVariable,yPositionTSIdifference)
 hold on
-loglog(currentVariable,zPositionTSIdifference)
+semilogy(currentVariable,zPositionTSIdifference)
 hold on
-loglog(currentVariable,xVelocityTSIdifference)
+semilogy(currentVariable,xVelocityTSIdifference)
 hold on
-loglog(currentVariable,yVelocityTSIdifference)
+semilogy(currentVariable,yVelocityTSIdifference)
 hold on
-loglog(currentVariable,zVelocityTSIdifference)
+semilogy(currentVariable,zVelocityTSIdifference)
 hold on
-% loglog(currentVariable,MassTSIdifference)
-% hold on
+% semilogy(currentVariable,MassTSIdifference)
 
 
 title(['Absolute differences w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference [m, m/s, kg]');
+ylabel('Absolute difference difference [m, m/s, kg]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 figure(12)
-loglog(currentVariable,xPositionTSIdifferenceRKF)
+semilogy(currentVariable,xPositionTSIdifferenceRKF)
 hold on
-loglog(currentVariable,yPositionTSIdifferenceRKF)
+semilogy(currentVariable,yPositionTSIdifferenceRKF)
 hold on
-loglog(currentVariable,zPositionTSIdifferenceRKF)
+semilogy(currentVariable,zPositionTSIdifferenceRKF)
 hold on
-loglog(currentVariable,xVelocityTSIdifferenceRKF)
+semilogy(currentVariable,xVelocityTSIdifferenceRKF)
 hold on
-loglog(currentVariable,yVelocityTSIdifferenceRKF)
+semilogy(currentVariable,yVelocityTSIdifferenceRKF)
 hold on
-loglog(currentVariable,zVelocityTSIdifferenceRKF)
+semilogy(currentVariable,zVelocityTSIdifferenceRKF)
 hold on
-% loglog(currentVariable,MassTSIdifferenceRKF)
-% hold on
+% semilogy(currentVariable,MassTSIdifferenceRKF)
 
 
 title(['Absolute differences w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference [m, m/s, kg]');
+ylabel('Absolute difference difference [m, m/s, kg]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
-
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 
 figure(13)
-loglog(currentVariable,xPositionTSIdifferenceCons)
+semilogy(currentVariable,xPositionTSIdifferenceCons)
 hold on
-loglog(currentVariable,yPositionTSIdifferenceCons)
+semilogy(currentVariable,yPositionTSIdifferenceCons)
 hold on
-loglog(currentVariable,zPositionTSIdifferenceCons)
+semilogy(currentVariable,zPositionTSIdifferenceCons)
 hold on
-loglog(currentVariable,xVelocityTSIdifferenceCons)
+semilogy(currentVariable,xVelocityTSIdifferenceCons)
 hold on
-loglog(currentVariable,yVelocityTSIdifferenceCons)
+semilogy(currentVariable,yVelocityTSIdifferenceCons)
 hold on
-loglog(currentVariable,zVelocityTSIdifferenceCons)
+semilogy(currentVariable,zVelocityTSIdifferenceCons)
 hold on
-% loglog(currentVariable,MassTSIdifferenceCons)
-% hold on
+% semilogy(currentVariable,MassTSIdifferenceCons)
 
 
 title(['Consecutive differences between ',currentVariableFolder]); % Give the figure a title
@@ -624,11 +636,26 @@ xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different a
 ylabel('Consecutive differences [m, m/s, kg]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Adding non rotating %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Propellant mass comparison
 
-disp('Now the non-rotating should be added')
+
+figure(14)
+plot(currentVariable,propMassTSI)
+hold on
+
+title(['Required propellant mass vs ',currentVariableFolder]); % Give the figure a title
+xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+ylabel('Required propellant mass [kg]');
+
+legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Non rotating Mars %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 % Write the paths to the folders
@@ -752,9 +779,12 @@ yVelocityTSI = VariableVectorTSI(:,11); % y-velocity TSI [km/s]
 zVelocityTSI = VariableVectorTSI(:,12); % z-velocity TSI [km/s]
 MassTSI = VariableVectorTSI(:,13); % Mass TSI [kg]
 
+% Required propellant mass to circularize and reach desired inclination
+propMassTSI = VariableVectorTSI(:,28); % TSI required propellant mass [kg]
+
 
 % Accuracy of the results and speed of convergence
-TruthTSI = VariableVectorTSI(end,7:13);
+TruthTSI = VariableVectorTSI(1,7:13);
 % TruthTSI = VariableVectorRKF((find(VariableVectorRKF(:,1)==20)),7:13);
 
 % Difference in metres w.r.t. the order 20 end state
@@ -810,11 +840,11 @@ end
 %% Evaluations per currentVariable and end state
 
 figure(1) % CPU time
-semilogx(currentVariable,cpuTimeTSI);
+scatter(currentVariable,cpuTimeTSI);
 
-% title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
-% xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-% ylabel('CPU time TSI [sec]');
+title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
+xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+ylabel('CPU time TSI [sec]');
 
 % axis([currentVariable(1) currentVariable(end) 0.05 0.1]) % First zoom
 % axis([currentVariable(1) currentVariable(end) 0.05 0.06]) % Second zoom
@@ -830,7 +860,7 @@ legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend 
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 figure(2) % Wall time
-semilogx(currentVariable,wallTimeTSI);
+plot(currentVariable,wallTimeTSI);
 
 title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
@@ -849,7 +879,7 @@ legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend 
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 figure(3) % Position
-semilogx(currentVariable,xPositionTSI)
+plot(currentVariable,xPositionTSI)
 
 title(['x-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
@@ -878,9 +908,7 @@ dummyVector(pos) = [];  % Delete the outliers
 Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
 STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
 
-% axis([currentVariable(end) currentVariable(1) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-
+% axis([min(currentVariable) max(currentVariable) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
@@ -889,7 +917,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 % legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
 
 figure(4)
-semilogx(currentVariable,yPositionTSI)
+plot(currentVariable,yPositionTSI)
 
 title(['y-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
@@ -918,15 +946,14 @@ dummyVector(pos) = [];  % Delete the outliers
 Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
 STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
 
-% axis([currentVariable(end) currentVariable(1) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-% legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
-
+% axis([min(currentVariable) max(currentVariable) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
+% legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
+
 figure(5)
-semilogx(currentVariable,zPositionTSI)
+plot(currentVariable,zPositionTSI)
 
 title(['z-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
@@ -955,15 +982,14 @@ dummyVector(pos) = [];  % Delete the outliers
 Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
 STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
 
-% axis([currentVariable(end) currentVariable(1) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-% legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
-
+% axis([min(currentVariable) max(currentVariable) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
+% legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
+
 figure(6) % Velocity
-semilogx(currentVariable,xVelocityTSI)
+plot(currentVariable,xVelocityTSI)
 % hold on
 % plot(currentVariable,yVelocityTSI)
 % hold on
@@ -996,15 +1022,14 @@ dummyVector(pos) = [];  % Delete the outliers
 Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
 STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
 
-% axis([currentVariable(end) currentVariable(1) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-% legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
-
+% axis([min(currentVariable) max(currentVariable) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
+% legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+
 figure(7)
-semilogx(currentVariable,yVelocityTSI)
+plot(currentVariable,yVelocityTSI)
 
 title(['y-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
@@ -1033,14 +1058,14 @@ dummyVector(pos) = [];  % Delete the outliers
 Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
 STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
 
-% axis([currentVariable(end) currentVariable(1) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-% legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+% axis([min(currentVariable) max(currentVariable) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
+% legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+
 figure(8)
-semilogx(currentVariable,zVelocityTSI)
+plot(currentVariable,zVelocityTSI)
 
 title(['z-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
@@ -1069,14 +1094,15 @@ dummyVector(pos) = [];  % Delete the outliers
 Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
 STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
 
-% axis([currentVariable(end) currentVariable(1) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-% legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+% axis([min(currentVariable) max(currentVariable) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
+% legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+
+
 figure(9)
-semilogx(currentVariable,functionEvaluationsTSI)
+plot(currentVariable,functionEvaluationsTSI)
 
 title(['Function evaluations vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
@@ -1105,25 +1131,40 @@ dummyVector(pos) = [];  % Delete the outliers
 Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
 STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
 
-% axis([currentVariable(end) currentVariable(1) 0 Meanadj+3*STDadj]) % Zoom
+% axis([currentVariable(1) currentVariable(end) 0 Meanadj+3*STDadj]) % Zoom
 % axis([currentVariable(1) currentVariable(end) 0 100]) % Zoom
+
+% ybounds = ylim();
+% set(gca, 'ytick', ybounds(1):1:ybounds(2));
 
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 
-
 figure(10)
-semilogx(functionEvaluationsTSI,cpuTimeTSI)
+scatter(functionEvaluationsTSI,cpuTimeTSI)
+hold on
+myPoly = polyfit(functionEvaluationsTSI,cpuTimeTSI,3);
+polyRange = min(functionEvaluationsTSI):1:max(functionEvaluationsTSI);
+polyvalNumber = polyval(myPoly,polyRange);
+
+% plot(polyRange,polyvalNumber)
+
+% plot(functionEvaluationsTSI,cpuTimeTSI)
 
 title(['Function evaluations vs CPU time TSI']); % Give the figure a title
 xlabel('Function evaluations [-]');
 ylabel('CPU time TSI [sec]'); % Label the different axes
 
+% xbounds = xlim();
+% set(gca, 'xtick', xbounds(1):1:xbounds(2));
 
-% axis([min(functionEvaluationsTSI)-5 100 0.05 0.09]) % Zoom
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
+
+
+
+% axis([min(functionEvaluationsTSI)-5 100 min(cpuTimeTSI) max(cpuTimeTSI)]) % Zoom
 
 %% Speed of convergence and accuracy
 
@@ -1145,9 +1186,10 @@ scatter(currentVariable,zVelocityTSIdifference)
 
 title(['Absolute differences w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference [m, m/s, kg]');
+ylabel('Absolute difference difference [m, m/s, kg]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 figure(12)
 scatter(currentVariable,xPositionTSIdifferenceRKF)
@@ -1167,10 +1209,10 @@ scatter(currentVariable,zVelocityTSIdifferenceRKF)
 
 title(['Absolute differences w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference [m, m/s, kg]');
+ylabel('Absolute difference difference [m, m/s, kg]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
-
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 
 figure(13)
@@ -1194,9 +1236,21 @@ xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different a
 ylabel('Consecutive differences [m, m/s, kg]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 
+%% Propellant mass comparison
 
+
+figure(14)
+plot(currentVariable,propMassTSI)
+
+title(['Required propellant mass vs ',currentVariableFolder]); % Give the figure a title
+xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+ylabel('Required propellant mass [kg]');
+
+legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 
 toc
