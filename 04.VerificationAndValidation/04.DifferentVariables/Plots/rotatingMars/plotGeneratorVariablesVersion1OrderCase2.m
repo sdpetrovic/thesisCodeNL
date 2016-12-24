@@ -25,7 +25,10 @@ tic
 
 %% Get the data
 
-pathToValidationFolder = '/home/stachap/Documents/Thesis/03. Tudat/tudatBundle/tudatApplications/thesisProject/04.VerificationAndValidation/04.DifferentVariables';
+pathToValidationFolder = '/home/stachap/Documents/Thesis/03. Tudat/tudatBundle/tudatApplications/thesisProject/04.VerificationAndValidation/04.DifferentVariables/rotatingMars';
+
+% pathToValidationFolder = '/home/stachap/Documents/Thesis/03. Tudat/tudatBundle/tudatApplications/thesisProject/04.VerificationAndValidation/04.DifferentVariables/oldRotatingMars';
+
 
 currentVariableFolder = 'Order';
 currentVariableUnit = '[-]';
@@ -220,363 +223,361 @@ end
 figure(1) % CPU time
 plot(currentVariable,cpuTimeTSI);
 
-title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
+% title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('CPU time TSI [sec]');
 
-% axis([currentVariable(1) currentVariable(end) 0.05 0.1]) % First zoom
-% axis([currentVariable(1) currentVariable(end) 0.05 0.06]) % Second zoom
 
-axis([currentVariable(1) currentVariable(end) 0.05 0.16]) % First zoom
-% case 2
-% axis([currentVariable(1) currentVariable(end) 0.05 0.06]) % Second zoom
-% case 2
+% axis([currentVariable(1) currentVariable(end) 0.08 0.16]) % First zoom
+axis([currentVariable(1) currentVariable(end) 0.0 0.02]) % Second zoom
 
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
-% legend('CPU time','Location','NorthEastOutside'); % Add a legend in the top right corner
-
-figure(2) % Wall time
-plot(currentVariable,wallTimeTSI);
-
-title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
-xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Wall time TSI [sec]');
-
-% axis([currentVariable(1) currentVariable(end) 0.05 0.1]) % First zoom
-% axis([currentVariable(1) currentVariable(end) 0.05 0.06]) % Second zoom
-
-axis([currentVariable(1) currentVariable(end) 0.05 0.16]) % First zoom
-% case 2
-% axis([currentVariable(1) currentVariable(end) 0.05 0.06]) % Second zoom
-% case 2
-
-% legend('Wall time','Location','NorthEastOutside'); % Add a legend in the top right corner
-
-figure(3) % Position
-plot(currentVariable,xPositionTSI)
-
-title(['x-Position vs ',currentVariableFolder]); % Give the figure a title
-xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('x-Position [km]');
-
-% Determine the mean and the standard deviation of the vector
-Mean = mean(xPositionTSI); % Mean of the vector
-STD = std(xPositionTSI);      % Standard deviation of the vector
-dummyVector = xPositionTSI;    % Create a replacement vector that can be adjusted
-
-j = 1; % Used to determine the position of the value that has to be removed
-for i = 1:1:length(dummyVector) % Replace every outlier that is beyond the standard deviation of the actual vector with the mean
-    
-        if dummyVector(i) > (Mean+STD)   % This is done to get an estimate of a proper axis boundary
-        pos(j) = i;
-        j = j+1;
-    elseif dummyVector(i) < (Mean - STD)
-        pos(j) = i;   
-        j = j+1;
-        end
-                    
-end
-
-dummyVector(pos) = [];  % Delete the outliers
-
-Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
-STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
-
-axis([currentVariable(1) currentVariable(end) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-
-
-% legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
-
-figure(4)
-plot(currentVariable,yPositionTSI)
-
-title(['y-Position vs ',currentVariableFolder]); % Give the figure a title
-xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('y-Position [km]');
-
-% Determine the mean and the standard deviation of the vector
-Mean = mean(yPositionTSI); % Mean of the vector
-STD = std(yPositionTSI);      % Standard deviation of the vector
-dummyVector = yPositionTSI;    % Create a replacement vector that can be adjusted
-
-j = 1; % Used to determine the position of the value that has to be removed
-for i = 1:1:length(dummyVector) % Replace every outlier that is beyond the standard deviation of the actual vector with the mean
-    
-        if dummyVector(i) > (Mean+STD)   % This is done to get an estimate of a proper axis boundary
-        pos(j) = i;
-        j = j+1;
-    elseif dummyVector(i) < (Mean - STD)
-        pos(j) = i;   
-        j = j+1;
-        end
-                    
-end
-
-dummyVector(pos) = [];  % Delete the outliers
-
-Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
-STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
-
-axis([currentVariable(1) currentVariable(end) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-% legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
-
-figure(5)
-plot(currentVariable,zPositionTSI)
-
-title(['z-Position vs ',currentVariableFolder]); % Give the figure a title
-xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('z-Position [km]');
-
-% Determine the mean and the standard deviation of the vector
-Mean = mean(zPositionTSI); % Mean of the vector
-STD = std(zPositionTSI);      % Standard deviation of the vector
-dummyVector = zPositionTSI;    % Create a replacement vector that can be adjusted
-
-j = 1; % Used to determine the position of the value that has to be removed
-for i = 1:1:length(dummyVector) % Replace every outlier that is beyond the standard deviation of the actual vector with the mean
-    
-        if dummyVector(i) > (Mean+STD)   % This is done to get an estimate of a proper axis boundary
-        pos(j) = i;
-        j = j+1;
-    elseif dummyVector(i) < (Mean - STD)
-        pos(j) = i;   
-        j = j+1;
-        end
-                    
-end
-
-dummyVector(pos) = [];  % Delete the outliers
-
-Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
-STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
-
-axis([currentVariable(1) currentVariable(end) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-% legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
-
-figure(6) % Velocity
-plot(currentVariable,xVelocityTSI)
-% hold on
+% %%
+% % legend('CPU time','Location','NorthEastOutside'); % Add a legend in the top right corner
+% 
+% figure(2) % Wall time
+% plot(currentVariable,wallTimeTSI);
+% 
+% title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
+% xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+% ylabel('Wall time TSI [sec]');
+% 
+% % axis([currentVariable(1) currentVariable(end) 0.05 0.1]) % First zoom
+% % axis([currentVariable(1) currentVariable(end) 0.05 0.06]) % Second zoom
+% 
+% axis([currentVariable(1) currentVariable(end) 0.05 0.16]) % First zoom
+% % case 2
+% % axis([currentVariable(1) currentVariable(end) 0.05 0.06]) % Second zoom
+% % case 2
+% 
+% % legend('Wall time','Location','NorthEastOutside'); % Add a legend in the top right corner
+% 
+% figure(3) % Position
+% plot(currentVariable,xPositionTSI)
+% 
+% title(['x-Position vs ',currentVariableFolder]); % Give the figure a title
+% xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+% ylabel('x-Position [km]');
+% 
+% % Determine the mean and the standard deviation of the vector
+% Mean = mean(xPositionTSI); % Mean of the vector
+% STD = std(xPositionTSI);      % Standard deviation of the vector
+% dummyVector = xPositionTSI;    % Create a replacement vector that can be adjusted
+% 
+% j = 1; % Used to determine the position of the value that has to be removed
+% for i = 1:1:length(dummyVector) % Replace every outlier that is beyond the standard deviation of the actual vector with the mean
+%     
+%         if dummyVector(i) > (Mean+STD)   % This is done to get an estimate of a proper axis boundary
+%         pos(j) = i;
+%         j = j+1;
+%     elseif dummyVector(i) < (Mean - STD)
+%         pos(j) = i;   
+%         j = j+1;
+%         end
+%                     
+% end
+% 
+% dummyVector(pos) = [];  % Delete the outliers
+% 
+% Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
+% STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
+% 
+% axis([currentVariable(1) currentVariable(end) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
+% 
+% 
+% 
+% % legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
+% 
+% figure(4)
+% plot(currentVariable,yPositionTSI)
+% 
+% title(['y-Position vs ',currentVariableFolder]); % Give the figure a title
+% xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+% ylabel('y-Position [km]');
+% 
+% % Determine the mean and the standard deviation of the vector
+% Mean = mean(yPositionTSI); % Mean of the vector
+% STD = std(yPositionTSI);      % Standard deviation of the vector
+% dummyVector = yPositionTSI;    % Create a replacement vector that can be adjusted
+% 
+% j = 1; % Used to determine the position of the value that has to be removed
+% for i = 1:1:length(dummyVector) % Replace every outlier that is beyond the standard deviation of the actual vector with the mean
+%     
+%         if dummyVector(i) > (Mean+STD)   % This is done to get an estimate of a proper axis boundary
+%         pos(j) = i;
+%         j = j+1;
+%     elseif dummyVector(i) < (Mean - STD)
+%         pos(j) = i;   
+%         j = j+1;
+%         end
+%                     
+% end
+% 
+% dummyVector(pos) = [];  % Delete the outliers
+% 
+% Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
+% STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
+% 
+% axis([currentVariable(1) currentVariable(end) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
+% 
+% % legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
+% 
+% figure(5)
+% plot(currentVariable,zPositionTSI)
+% 
+% title(['z-Position vs ',currentVariableFolder]); % Give the figure a title
+% xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+% ylabel('z-Position [km]');
+% 
+% % Determine the mean and the standard deviation of the vector
+% Mean = mean(zPositionTSI); % Mean of the vector
+% STD = std(zPositionTSI);      % Standard deviation of the vector
+% dummyVector = zPositionTSI;    % Create a replacement vector that can be adjusted
+% 
+% j = 1; % Used to determine the position of the value that has to be removed
+% for i = 1:1:length(dummyVector) % Replace every outlier that is beyond the standard deviation of the actual vector with the mean
+%     
+%         if dummyVector(i) > (Mean+STD)   % This is done to get an estimate of a proper axis boundary
+%         pos(j) = i;
+%         j = j+1;
+%     elseif dummyVector(i) < (Mean - STD)
+%         pos(j) = i;   
+%         j = j+1;
+%         end
+%                     
+% end
+% 
+% dummyVector(pos) = [];  % Delete the outliers
+% 
+% Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
+% STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
+% 
+% axis([currentVariable(1) currentVariable(end) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
+% 
+% % legend('x-Position','y-Position','z-Position','Location','NorthEastOutside'); % Add a legend in the top right corner
+% 
+% figure(6) % Velocity
+% plot(currentVariable,xVelocityTSI)
+% % hold on
+% % plot(currentVariable,yVelocityTSI)
+% % hold on
+% % plot(currentVariable,zVelocityTSI)
+% 
+% title(['x-Velocity vs ',currentVariableFolder]); % Give the figure a title
+% xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+% ylabel('x-Velocity [km]');
+% 
+% % Determine the mean and the standard deviation of the vector
+% Mean = mean(xVelocityTSI); % Mean of the vector
+% STD = std(xVelocityTSI);      % Standard deviation of the vector
+% dummyVector = xVelocityTSI;    % Create a replacement vector that can be adjusted
+% 
+% j = 1; % Used to determine the position of the value that has to be removed
+% for i = 1:1:length(dummyVector) % Replace every outlier that is beyond the standard deviation of the actual vector with the mean
+%     
+%         if dummyVector(i) > (Mean+STD)   % This is done to get an estimate of a proper axis boundary
+%         pos(j) = i;
+%         j = j+1;
+%     elseif dummyVector(i) < (Mean - STD)
+%         pos(j) = i;   
+%         j = j+1;
+%         end
+%                     
+% end
+% 
+% dummyVector(pos) = [];  % Delete the outliers
+% 
+% Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
+% STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
+% 
+% axis([currentVariable(1) currentVariable(end) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
+% 
+% % legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+% 
+% figure(7)
 % plot(currentVariable,yVelocityTSI)
-% hold on
+% 
+% title(['y-Velocity vs ',currentVariableFolder]); % Give the figure a title
+% xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+% ylabel('y-Velocity [km]');
+% 
+% % Determine the mean and the standard deviation of the vector
+% Mean = mean(yVelocityTSI); % Mean of the vector
+% STD = std(yVelocityTSI);      % Standard deviation of the vector
+% dummyVector = yVelocityTSI;    % Create a replacement vector that can be adjusted
+% 
+% j = 1; % Used to determine the position of the value that has to be removed
+% for i = 1:1:length(dummyVector) % Replace every outlier that is beyond the standard deviation of the actual vector with the mean
+%     
+%         if dummyVector(i) > (Mean+STD)   % This is done to get an estimate of a proper axis boundary
+%         pos(j) = i;
+%         j = j+1;
+%     elseif dummyVector(i) < (Mean - STD)
+%         pos(j) = i;   
+%         j = j+1;
+%         end
+%                     
+% end
+% 
+% dummyVector(pos) = [];  % Delete the outliers
+% 
+% Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
+% STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
+% 
+% axis([currentVariable(1) currentVariable(end) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
+% 
+% % legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+% 
+% figure(8)
 % plot(currentVariable,zVelocityTSI)
-
-title(['x-Velocity vs ',currentVariableFolder]); % Give the figure a title
-xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('x-Velocity [km]');
-
-% Determine the mean and the standard deviation of the vector
-Mean = mean(xVelocityTSI); % Mean of the vector
-STD = std(xVelocityTSI);      % Standard deviation of the vector
-dummyVector = xVelocityTSI;    % Create a replacement vector that can be adjusted
-
-j = 1; % Used to determine the position of the value that has to be removed
-for i = 1:1:length(dummyVector) % Replace every outlier that is beyond the standard deviation of the actual vector with the mean
-    
-        if dummyVector(i) > (Mean+STD)   % This is done to get an estimate of a proper axis boundary
-        pos(j) = i;
-        j = j+1;
-    elseif dummyVector(i) < (Mean - STD)
-        pos(j) = i;   
-        j = j+1;
-        end
-                    
-end
-
-dummyVector(pos) = [];  % Delete the outliers
-
-Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
-STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
-
-axis([currentVariable(1) currentVariable(end) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-% legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
-
-figure(7)
-plot(currentVariable,yVelocityTSI)
-
-title(['y-Velocity vs ',currentVariableFolder]); % Give the figure a title
-xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('y-Velocity [km]');
-
-% Determine the mean and the standard deviation of the vector
-Mean = mean(yVelocityTSI); % Mean of the vector
-STD = std(yVelocityTSI);      % Standard deviation of the vector
-dummyVector = yVelocityTSI;    % Create a replacement vector that can be adjusted
-
-j = 1; % Used to determine the position of the value that has to be removed
-for i = 1:1:length(dummyVector) % Replace every outlier that is beyond the standard deviation of the actual vector with the mean
-    
-        if dummyVector(i) > (Mean+STD)   % This is done to get an estimate of a proper axis boundary
-        pos(j) = i;
-        j = j+1;
-    elseif dummyVector(i) < (Mean - STD)
-        pos(j) = i;   
-        j = j+1;
-        end
-                    
-end
-
-dummyVector(pos) = [];  % Delete the outliers
-
-Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
-STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
-
-axis([currentVariable(1) currentVariable(end) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-% legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
-
-figure(8)
-plot(currentVariable,zVelocityTSI)
-
-title(['z-Velocity vs ',currentVariableFolder]); % Give the figure a title
-xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('z-Velocity [km]');
-
-% Determine the mean and the standard deviation of the vector
-Mean = mean(zVelocityTSI); % Mean of the vector
-STD = std(zVelocityTSI);      % Standard deviation of the vector
-dummyVector = zVelocityTSI;    % Create a replacement vector that can be adjusted
-
-j = 1; % Used to determine the position of the value that has to be removed
-for i = 1:1:length(dummyVector) % Replace every outlier that is beyond the standard deviation of the actual vector with the mean
-    
-        if dummyVector(i) > (Mean+STD)   % This is done to get an estimate of a proper axis boundary
-        pos(j) = i;
-        j = j+1;
-    elseif dummyVector(i) < (Mean - STD)
-        pos(j) = i;   
-        j = j+1;
-        end
-                    
-end
-
-dummyVector(pos) = [];  % Delete the outliers
-
-Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
-STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
-
-axis([currentVariable(1) currentVariable(end) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
-
-% legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
-
-
-figure(9)
-plot(currentVariable,functionEvaluationsTSI)
-
-title(['Function evaluations vs ',currentVariableFolder]); % Give the figure a title
-xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Function evaluations [-]');
-
-% Determine the mean and the standard deviation of the vector
-Mean = mean(functionEvaluationsTSI); % Mean of the vector
-STD = std(functionEvaluationsTSI);      % Standard deviation of the vector
-dummyVector = functionEvaluationsTSI;    % Create a replacement vector that can be adjusted
-
-j = 1; % Used to determine the position of the value that has to be removed
-for i = 1:1:length(dummyVector) % Replace every outlier that is beyond the standard deviation of the actual vector with the mean
-    
-        if dummyVector(i) > (Mean+STD)   % This is done to get an estimate of a proper axis boundary
-        pos(j) = i;
-        j = j+1;
-    elseif dummyVector(i) < (Mean - STD)
-        pos(j) = i;   
-        j = j+1;
-        end
-                    
-end
-
-dummyVector(pos) = [];  % Delete the outliers
-
-Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
-STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
-
-% axis([currentVariable(1) currentVariable(end) 0 Meanadj+3*STDadj]) % Zoom
-axis([currentVariable(1) currentVariable(end) 0 100]) % Zoom
-
-
-
-figure(10)
-plot(functionEvaluationsTSI,cpuTimeTSI)
-
-title(['Function evaluations vs CPU time TSI']); % Give the figure a title
-xlabel('Function evaluations [-]');
-ylabel('CPU time TSI [sec]'); % Label the different axes
-
-
-axis([min(functionEvaluationsTSI)-5 100 0.08 0.09]) % Zoom
-
-%% Speed of convergence and accuracy
-
-figure(11)
-semilogy(currentVariable,xPositionTSIdifference)
-hold on
-semilogy(currentVariable,yPositionTSIdifference)
-hold on
-semilogy(currentVariable,zPositionTSIdifference)
-hold on
-semilogy(currentVariable,xVelocityTSIdifference)
-hold on
-semilogy(currentVariable,yVelocityTSIdifference)
-hold on
-semilogy(currentVariable,zVelocityTSIdifference)
-hold on
-semilogy(currentVariable,MassTSIdifference)
-
-
-title(['Absolute differences w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
-xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference [m, m/s, kg]');
-
-legend('x-Position','y-Position','z-Position','x-Velocity','y-Velocity','z-Velocity','Mass','Location','NorthEastOutside'); % Add a legend in the top right corner
-
-figure(12)
-semilogy(currentVariable,xPositionTSIdifferenceRKF)
-hold on
-semilogy(currentVariable,yPositionTSIdifferenceRKF)
-hold on
-semilogy(currentVariable,zPositionTSIdifferenceRKF)
-hold on
-semilogy(currentVariable,xVelocityTSIdifferenceRKF)
-hold on
-semilogy(currentVariable,yVelocityTSIdifferenceRKF)
-hold on
-semilogy(currentVariable,zVelocityTSIdifferenceRKF)
-hold on
-semilogy(currentVariable,MassTSIdifferenceRKF)
-
-
-title(['Absolute differences w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
-xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference [m, m/s, kg]');
-
-legend('x-Position','y-Position','z-Position','x-Velocity','y-Velocity','z-Velocity','Mass','Location','NorthEastOutside'); % Add a legend in the top right corner
-
-
-
-figure(13)
-semilogy(currentVariable,xPositionTSIdifferenceCons)
-hold on
-semilogy(currentVariable,yPositionTSIdifferenceCons)
-hold on
-semilogy(currentVariable,zPositionTSIdifferenceCons)
-hold on
-semilogy(currentVariable,xVelocityTSIdifferenceCons)
-hold on
-semilogy(currentVariable,yVelocityTSIdifferenceCons)
-hold on
-semilogy(currentVariable,zVelocityTSIdifferenceCons)
-hold on
-semilogy(currentVariable,MassTSIdifferenceCons)
-
-
-title(['Consecutive differences between ',currentVariableFolder]); % Give the figure a title
-xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Consecutive differences [m, m/s, kg]');
-
-legend('x-Position','y-Position','z-Position','x-Velocity','y-Velocity','z-Velocity','Mass','Location','NorthEastOutside'); % Add a legend in the top right corner
+% 
+% title(['z-Velocity vs ',currentVariableFolder]); % Give the figure a title
+% xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+% ylabel('z-Velocity [km]');
+% 
+% % Determine the mean and the standard deviation of the vector
+% Mean = mean(zVelocityTSI); % Mean of the vector
+% STD = std(zVelocityTSI);      % Standard deviation of the vector
+% dummyVector = zVelocityTSI;    % Create a replacement vector that can be adjusted
+% 
+% j = 1; % Used to determine the position of the value that has to be removed
+% for i = 1:1:length(dummyVector) % Replace every outlier that is beyond the standard deviation of the actual vector with the mean
+%     
+%         if dummyVector(i) > (Mean+STD)   % This is done to get an estimate of a proper axis boundary
+%         pos(j) = i;
+%         j = j+1;
+%     elseif dummyVector(i) < (Mean - STD)
+%         pos(j) = i;   
+%         j = j+1;
+%         end
+%                     
+% end
+% 
+% dummyVector(pos) = [];  % Delete the outliers
+% 
+% Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
+% STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
+% 
+% axis([currentVariable(1) currentVariable(end) Meanadj-3*STDadj Meanadj+3*STDadj]) % Zoom
+% 
+% % legend('x-Velocity','y-Velocity','z-Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+% 
+% 
+% figure(9)
+% plot(currentVariable,functionEvaluationsTSI)
+% 
+% title(['Function evaluations vs ',currentVariableFolder]); % Give the figure a title
+% xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+% ylabel('Function evaluations [-]');
+% 
+% % Determine the mean and the standard deviation of the vector
+% Mean = mean(functionEvaluationsTSI); % Mean of the vector
+% STD = std(functionEvaluationsTSI);      % Standard deviation of the vector
+% dummyVector = functionEvaluationsTSI;    % Create a replacement vector that can be adjusted
+% 
+% j = 1; % Used to determine the position of the value that has to be removed
+% for i = 1:1:length(dummyVector) % Replace every outlier that is beyond the standard deviation of the actual vector with the mean
+%     
+%         if dummyVector(i) > (Mean+STD)   % This is done to get an estimate of a proper axis boundary
+%         pos(j) = i;
+%         j = j+1;
+%     elseif dummyVector(i) < (Mean - STD)
+%         pos(j) = i;   
+%         j = j+1;
+%         end
+%                     
+% end
+% 
+% dummyVector(pos) = [];  % Delete the outliers
+% 
+% Meanadj = mean(dummyVector); % Determine the new mean (or adjusted mean, adj)
+% STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
+% 
+% % axis([currentVariable(1) currentVariable(end) 0 Meanadj+3*STDadj]) % Zoom
+% axis([currentVariable(1) currentVariable(end) 0 100]) % Zoom
+% 
+% 
+% 
+% figure(10)
+% plot(functionEvaluationsTSI,cpuTimeTSI)
+% 
+% title(['Function evaluations vs CPU time TSI']); % Give the figure a title
+% xlabel('Function evaluations [-]');
+% ylabel('CPU time TSI [sec]'); % Label the different axes
+% 
+% 
+% axis([min(functionEvaluationsTSI)-5 100 0.08 0.09]) % Zoom
+% 
+% %% Speed of convergence and accuracy
+% 
+% figure(11)
+% semilogy(currentVariable,xPositionTSIdifference)
+% hold on
+% semilogy(currentVariable,yPositionTSIdifference)
+% hold on
+% semilogy(currentVariable,zPositionTSIdifference)
+% hold on
+% semilogy(currentVariable,xVelocityTSIdifference)
+% hold on
+% semilogy(currentVariable,yVelocityTSIdifference)
+% hold on
+% semilogy(currentVariable,zVelocityTSIdifference)
+% hold on
+% semilogy(currentVariable,MassTSIdifference)
+% 
+% 
+% title(['Absolute differences w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
+% xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+% ylabel('Absolute difference [m, m/s, kg]');
+% 
+% legend('x-Position','y-Position','z-Position','x-Velocity','y-Velocity','z-Velocity','Mass','Location','NorthEastOutside'); % Add a legend in the top right corner
+% 
+% figure(12)
+% semilogy(currentVariable,xPositionTSIdifferenceRKF)
+% hold on
+% semilogy(currentVariable,yPositionTSIdifferenceRKF)
+% hold on
+% semilogy(currentVariable,zPositionTSIdifferenceRKF)
+% hold on
+% semilogy(currentVariable,xVelocityTSIdifferenceRKF)
+% hold on
+% semilogy(currentVariable,yVelocityTSIdifferenceRKF)
+% hold on
+% semilogy(currentVariable,zVelocityTSIdifferenceRKF)
+% hold on
+% semilogy(currentVariable,MassTSIdifferenceRKF)
+% 
+% 
+% title(['Absolute differences w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
+% xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+% ylabel('Absolute difference [m, m/s, kg]');
+% 
+% legend('x-Position','y-Position','z-Position','x-Velocity','y-Velocity','z-Velocity','Mass','Location','NorthEastOutside'); % Add a legend in the top right corner
+% 
+% 
+% 
+% figure(13)
+% semilogy(currentVariable,xPositionTSIdifferenceCons)
+% hold on
+% semilogy(currentVariable,yPositionTSIdifferenceCons)
+% hold on
+% semilogy(currentVariable,zPositionTSIdifferenceCons)
+% hold on
+% semilogy(currentVariable,xVelocityTSIdifferenceCons)
+% hold on
+% semilogy(currentVariable,yVelocityTSIdifferenceCons)
+% hold on
+% semilogy(currentVariable,zVelocityTSIdifferenceCons)
+% hold on
+% semilogy(currentVariable,MassTSIdifferenceCons)
+% 
+% 
+% title(['Consecutive differences between ',currentVariableFolder]); % Give the figure a title
+% xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+% ylabel('Consecutive differences [m, m/s, kg]');
+% 
+% legend('x-Position','y-Position','z-Position','x-Velocity','y-Velocity','z-Velocity','Mass','Location','NorthEastOutside'); % Add a legend in the top right corner
 
 toc
 

@@ -234,7 +234,7 @@ figure(1) % CPU time
 semilogx(currentVariable,cpuTimeTSI);
 hold on
 
-title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
+%title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('CPU time TSI [sec]');
 
@@ -256,7 +256,7 @@ figure(2) % Wall time
 semilogx(currentVariable,wallTimeTSI);
 hold on
 
-title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
+%title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Wall time TSI [sec]');
 
@@ -277,7 +277,7 @@ figure(3) % Position
 semilogx(currentVariable,xPositionTSI)
 hold on
 
-title(['x-Position vs ',currentVariableFolder]); % Give the figure a title
+%title(['x-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('x-Position [km]');
 
@@ -317,7 +317,7 @@ figure(4)
 semilogx(currentVariable,yPositionTSI)
 hold on
 
-title(['y-Position vs ',currentVariableFolder]); % Give the figure a title
+%title(['y-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('y-Position [km]');
 
@@ -354,7 +354,7 @@ figure(5)
 semilogx(currentVariable,zPositionTSI)
 hold on
 
-title(['z-Position vs ',currentVariableFolder]); % Give the figure a title
+%title(['z-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('z-Position [km]');
 
@@ -394,7 +394,7 @@ hold on
 % hold on
 % plot(currentVariable,zVelocityTSI)
 
-title(['x-Velocity vs ',currentVariableFolder]); % Give the figure a title
+%title(['x-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('x-Velocity [km]');
 
@@ -431,7 +431,7 @@ figure(7)
 semilogx(currentVariable,yVelocityTSI)
 hold on
 
-title(['y-Velocity vs ',currentVariableFolder]); % Give the figure a title
+%title(['y-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('y-Velocity [km]');
 
@@ -468,7 +468,7 @@ figure(8)
 semilogx(currentVariable,zVelocityTSI)
 hold on
 
-title(['z-Velocity vs ',currentVariableFolder]); % Give the figure a title
+%title(['z-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('z-Velocity [km]');
 
@@ -506,7 +506,7 @@ figure(9)
 semilogx(currentVariable,functionEvaluationsTSI)
 hold on
 
-title(['Function evaluations vs ',currentVariableFolder]); % Give the figure a title
+%title(['Function evaluations vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Function evaluations [-]');
 
@@ -542,7 +542,7 @@ figure(10)
 semilogx(functionEvaluationsTSI,cpuTimeTSI)
 hold on
 
-title(['Function evaluations vs CPU time TSI']); % Give the figure a title
+%title(['Function evaluations vs CPU time TSI']); % Give the figure a title
 xlabel('Function evaluations [-]');
 ylabel('CPU time TSI [sec]'); % Label the different axes
 
@@ -571,7 +571,7 @@ hold on
 % hold on
 
 
-title(['Absolute differences w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
+%title(['Absolute differences w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Absolute difference [m, m/s, kg]');
 
@@ -594,7 +594,7 @@ hold on
 % hold on
 
 
-title(['Absolute differences w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
+%title(['Absolute differences w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Absolute difference [m, m/s, kg]');
 
@@ -619,7 +619,7 @@ hold on
 % hold on
 
 
-title(['Consecutive differences between ',currentVariableFolder]); % Give the figure a title
+%title(['Consecutive differences between ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Consecutive differences [m, m/s, kg]');
 
@@ -812,7 +812,7 @@ end
 figure(1) % CPU time
 semilogx(currentVariable,cpuTimeTSI);
 
-% title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
+% %title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
 % xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 % ylabel('CPU time TSI [sec]');
 
@@ -832,7 +832,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(2) % Wall time
 semilogx(currentVariable,wallTimeTSI);
 
-title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
+%title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Wall time TSI [sec]');
 
@@ -851,7 +851,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(3) % Position
 semilogx(currentVariable,xPositionTSI)
 
-title(['x-Position vs ',currentVariableFolder]); % Give the figure a title
+%title(['x-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('x-Position [km]');
 
@@ -891,7 +891,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(4)
 semilogx(currentVariable,yPositionTSI)
 
-title(['y-Position vs ',currentVariableFolder]); % Give the figure a title
+%title(['y-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('y-Position [km]');
 
@@ -928,7 +928,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(5)
 semilogx(currentVariable,zPositionTSI)
 
-title(['z-Position vs ',currentVariableFolder]); % Give the figure a title
+%title(['z-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('z-Position [km]');
 
@@ -969,7 +969,7 @@ semilogx(currentVariable,xVelocityTSI)
 % hold on
 % plot(currentVariable,zVelocityTSI)
 
-title(['x-Velocity vs ',currentVariableFolder]); % Give the figure a title
+%title(['x-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('x-Velocity [km]');
 
@@ -1006,7 +1006,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(7)
 semilogx(currentVariable,yVelocityTSI)
 
-title(['y-Velocity vs ',currentVariableFolder]); % Give the figure a title
+%title(['y-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('y-Velocity [km]');
 
@@ -1042,7 +1042,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(8)
 semilogx(currentVariable,zVelocityTSI)
 
-title(['z-Velocity vs ',currentVariableFolder]); % Give the figure a title
+%title(['z-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('z-Velocity [km]');
 
@@ -1078,7 +1078,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(9)
 semilogx(currentVariable,functionEvaluationsTSI)
 
-title(['Function evaluations vs ',currentVariableFolder]); % Give the figure a title
+%title(['Function evaluations vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Function evaluations [-]');
 
@@ -1116,7 +1116,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(10)
 semilogx(functionEvaluationsTSI,cpuTimeTSI)
 
-title(['Function evaluations vs CPU time TSI']); % Give the figure a title
+%title(['Function evaluations vs CPU time TSI']); % Give the figure a title
 xlabel('Function evaluations [-]');
 ylabel('CPU time TSI [sec]'); % Label the different axes
 
@@ -1143,7 +1143,7 @@ scatter(currentVariable,zVelocityTSIdifference)
 % scatter(currentVariable,MassTSIdifference)
 
 
-title(['Absolute differences w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
+%title(['Absolute differences w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Absolute difference [m, m/s, kg]');
 
@@ -1165,7 +1165,7 @@ scatter(currentVariable,zVelocityTSIdifferenceRKF)
 % scatter(currentVariable,MassTSIdifferenceRKF)
 
 
-title(['Absolute differences w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
+%title(['Absolute differences w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Absolute difference [m, m/s, kg]');
 
@@ -1189,7 +1189,7 @@ scatter(currentVariable,zVelocityTSIdifferenceCons)
 % scatter(currentVariable,MassTSIdifferenceCons)
 
 
-title(['Consecutive differences between ',currentVariableFolder]); % Give the figure a title
+%title(['Consecutive differences between ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Consecutive differences [m, m/s, kg]');
 

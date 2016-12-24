@@ -719,7 +719,6 @@ semilogy(currentVariable_rot,zVelocityTSIdifferenceCons_rot)
 hold on
 % semilogy(currentVariable_rot,MassTSIdifferenceCons_rot)
 
-xlim([0 30]);
 
 %title(['Consecutive differences rotating Mars between ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
@@ -804,7 +803,7 @@ scatter(currentVariable_notRot,zVelocityTSIdifferenceCons_notRot)
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Consecutive differences [m, m/s]');
 
-xlim([0 30]);
+axis([min(currentVariable_notRot) max(currentVariable_not]);
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
 

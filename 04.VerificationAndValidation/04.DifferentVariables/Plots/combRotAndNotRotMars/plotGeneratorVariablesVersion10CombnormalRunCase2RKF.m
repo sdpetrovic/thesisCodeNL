@@ -45,15 +45,15 @@ currentVariableFolder = 'normalRun';
 
 
 currentVariableUnit = '[-]';
-currentCaseFolder = 'Case1';
-filePref = 0; % Choose a different file from the last one. So if this number is 1, you choose the penultimate file etc.
+currentCaseFolder = 'Case2';
+filePref = 1; % Choose a different file from the last one. So if this number is 1, you choose the penultimate file etc.
 
 % Automatic latest file name (Source:
 % https://www.youtube.com/watch?v=D8UkAOhsyDI)
 
 % Write the paths to the folders
 pathTSIrot = fullfile(pathToValidationFolder,'rotatingMars/TSI',currentVariableFolder,currentCaseFolder);
-pathTSInotRot = fullfile(pathToValidationFolder,'nonRotatingMars/TSI',currentVariableFolder,currentCaseFolder);
+pathTSInotRot = fullfile(pathToValidationFolder,'rotatingMars/RKF',currentVariableFolder,currentCaseFolder);
 
 % pathRKF = fullfile(pathToValidationFolder,'RKF',currentVariableFolder,currentCaseFolder);
 
@@ -267,7 +267,7 @@ ylabel('CPU time TSI [sec]');
 % case 2
 
 
-legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
+legend('TSI','RKF','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 

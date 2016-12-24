@@ -311,7 +311,7 @@ hold on
 scatter(currentVariable_notRot,cpuTimeTSI_notRot);
 
 
-title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
+%title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('CPU time TSI [sec]');
 
@@ -334,7 +334,7 @@ hold on
 plot(currentVariable_notRot,wallTimeTSI_notRot);
 
 
-title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
+%title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Wall time TSI [sec]');
 
@@ -356,7 +356,7 @@ hold on
 plot(currentVariable_notRot,xPositionTSI_notRot)
 
 
-title(['x-Position vs ',currentVariableFolder]); % Give the figure a title
+%title(['x-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('x-Position [km]');
 
@@ -397,7 +397,7 @@ hold on
 plot(currentVariable_notRot,yPositionTSI_notRot)
 
 
-title(['y-Position vs ',currentVariableFolder]); % Give the figure a title
+%title(['y-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('y-Position [km]');
 
@@ -436,7 +436,7 @@ hold on
 plot(currentVariable_notRot,zPositionTSI_notRot)
 
 
-title(['z-Position vs ',currentVariableFolder]); % Give the figure a title
+%title(['z-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('z-Position [km]');
 
@@ -478,7 +478,7 @@ plot(currentVariable_notRot,xVelocityTSI_notRot)
 % hold on
 % plot(currentVariable_rot,zVelocityTSI)
 
-title(['x-Velocity vs ',currentVariableFolder]); % Give the figure a title
+%title(['x-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('x-Velocity [km]');
 
@@ -517,7 +517,7 @@ hold on
 plot(currentVariable_notRot,yVelocityTSI_notRot)
 
 
-title(['y-Velocity vs ',currentVariableFolder]); % Give the figure a title
+%title(['y-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('y-Velocity [km]');
 
@@ -556,7 +556,7 @@ hold on
 plot(currentVariable_notRot,zVelocityTSI_notRot)
 
 
-title(['z-Velocity vs ',currentVariableFolder]); % Give the figure a title
+%title(['z-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('z-Velocity [km]');
 
@@ -596,7 +596,7 @@ hold on
 semilogy(currentVariable_notRot,functionEvaluationsTSI_notRot)
 
 
-title(['Function evaluations vs ',currentVariableFolder]); % Give the figure a title
+%title(['Function evaluations vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Function evaluations [-]');
 
@@ -639,7 +639,7 @@ set(gca,'xscale','log')
 
 
 
-title(['Function evaluations vs CPU time TSI']); % Give the figure a title
+%title(['Function evaluations vs CPU time TSI']); % Give the figure a title
 xlabel('Function evaluations [-]');
 ylabel('CPU time TSI [sec]'); % Label the different axes
 
@@ -666,15 +666,16 @@ hold on
 semilogy(currentVariable_rot,zVelocityTSIdifference_rot)
 % hold on 
 % scatter(currentVariable_notRot,xPositionTSIdifference_notRot)
-% hold on
+hold on
 % semilogy(currentVariable_rot,MassTSIdifference_rot)
 
 
-title(['Absolute differences rotating Mars w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
+% title(['Absolute differences rotating Mars w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference [m, m/s, kg]');
+ylabel('Absolute difference [m, m/s]');
 
-legend('x-Position','y-Position','z-Position','x-Velocity','y-Velocity','z-Velocity','Mass','Location','NorthEastOutside'); % Add a legend in the top right corner
+legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
+
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 figure(12)
@@ -689,15 +690,16 @@ hold on
 semilogy(currentVariable_rot,yVelocityTSIdifferenceRKF_rot)
 hold on
 semilogy(currentVariable_rot,zVelocityTSIdifferenceRKF_rot)
-% hold on
+hold on
 % semilogy(currentVariable_rot,MassTSIdifferenceRKF_rot)
 
 
-title(['Absolute differences rotating Mars w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
+% title(['Absolute differences rotating Mars w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference [m, m/s, kg]');
+ylabel('Absolute difference [m, m/s]');
 
-legend('x-Position','y-Position','z-Position','x-Velocity','y-Velocity','z-Velocity','Mass','Location','NorthEastOutside'); % Add a legend in the top right corner
+legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
+
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 
@@ -714,91 +716,95 @@ hold on
 semilogy(currentVariable_rot,yVelocityTSIdifferenceCons_rot)
 hold on
 semilogy(currentVariable_rot,zVelocityTSIdifferenceCons_rot)
-% hold on
+hold on
 % semilogy(currentVariable_rot,MassTSIdifferenceCons_rot)
 
 
-title(['Consecutive differences rotating Mars between ',currentVariableFolder]); % Give the figure a title
+% title(['Consecutive differences rotating Mars between ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Consecutive differences [m, m/s, kg]');
+ylabel('Consecutive differences [m, m/s]');
 
-legend('x-Position','y-Position','z-Position','x-Velocity','y-Velocity','z-Velocity','Mass','Location','NorthEastOutside'); % Add a legend in the top right corner
+legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
+
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 
 %%%%%%%%%%%%% Non rotating
 
-figure(14)
-semilogy(currentVariable_notRot,xPositionTSIdifference_notRot)
+figure(11)
+scatter(currentVariable_notRot,xPositionTSIdifference_notRot)
 hold on
-semilogy(currentVariable_notRot,yPositionTSIdifference_notRot)
+scatter(currentVariable_notRot,yPositionTSIdifference_notRot)
 hold on
-semilogy(currentVariable_notRot,zPositionTSIdifference_notRot)
+scatter(currentVariable_notRot,zPositionTSIdifference_notRot)
 hold on
-semilogy(currentVariable_notRot,xVelocityTSIdifference_notRot)
+scatter(currentVariable_notRot,xVelocityTSIdifference_notRot)
 hold on
-semilogy(currentVariable_notRot,yVelocityTSIdifference_notRot)
+scatter(currentVariable_notRot,yVelocityTSIdifference_notRot)
 hold on
-semilogy(currentVariable_notRot,zVelocityTSIdifference_notRot)
+scatter(currentVariable_notRot,zVelocityTSIdifference_notRot)
 % hold on 
 % scatter(currentVariable_notnotRot,xPositionTSIdifference_notnotRot)
 % hold on
-% semilogy(currentVariable_notRot,MassTSIdifference_notRot)
+% scatter(currentVariable_notRot,MassTSIdifference_notRot)
 
 
-title(['Absolute differences non-rotating Mars w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
+% title(['Absolute differences non-rotating Mars w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference [m, m/s, kg]');
+ylabel('Absolute difference [m, m/s]');
 
-legend('x-Position','y-Position','z-Position','x-Velocity','y-Velocity','z-Velocity','Mass','Location','NorthEastOutside'); % Add a legend in the top right corner
+legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
+
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
-figure(15)
-semilogy(currentVariable_notRot,xPositionTSIdifferenceRKF_notRot)
+figure(12)
+scatter(currentVariable_notRot,xPositionTSIdifferenceRKF_notRot)
 hold on
-semilogy(currentVariable_notRot,yPositionTSIdifferenceRKF_notRot)
+scatter(currentVariable_notRot,yPositionTSIdifferenceRKF_notRot)
 hold on
-semilogy(currentVariable_notRot,zPositionTSIdifferenceRKF_notRot)
+scatter(currentVariable_notRot,zPositionTSIdifferenceRKF_notRot)
 hold on
-semilogy(currentVariable_notRot,xVelocityTSIdifferenceRKF_notRot)
+scatter(currentVariable_notRot,xVelocityTSIdifferenceRKF_notRot)
 hold on
-semilogy(currentVariable_notRot,yVelocityTSIdifferenceRKF_notRot)
+scatter(currentVariable_notRot,yVelocityTSIdifferenceRKF_notRot)
 hold on
-semilogy(currentVariable_notRot,zVelocityTSIdifferenceRKF_notRot)
+scatter(currentVariable_notRot,zVelocityTSIdifferenceRKF_notRot)
 % hold on
-% semilogy(currentVariable_notRot,MassTSIdifferenceRKF_notRot)
+% scatter(currentVariable_notRot,MassTSIdifferenceRKF_notRot)
 
 
-title(['Absolute differences non-rotating Mars w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
+% title(['Absolute differences non-rotating Mars w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference [m, m/s, kg]');
+ylabel('Absolute difference [m, m/s]');
 
-legend('x-Position','y-Position','z-Position','x-Velocity','y-Velocity','z-Velocity','Mass','Location','NorthEastOutside'); % Add a legend in the top right corner
+legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
+
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 
 
-figure(16)
-semilogy(currentVariable_notRot,xPositionTSIdifferenceCons_notRot)
+figure(13)
+scatter(currentVariable_notRot,xPositionTSIdifferenceCons_notRot)
 hold on
-semilogy(currentVariable_notRot,yPositionTSIdifferenceCons_notRot)
+scatter(currentVariable_notRot,yPositionTSIdifferenceCons_notRot)
 hold on
-semilogy(currentVariable_notRot,zPositionTSIdifferenceCons_notRot)
+scatter(currentVariable_notRot,zPositionTSIdifferenceCons_notRot)
 hold on
-semilogy(currentVariable_notRot,xVelocityTSIdifferenceCons_notRot)
+scatter(currentVariable_notRot,xVelocityTSIdifferenceCons_notRot)
 hold on
-semilogy(currentVariable_notRot,yVelocityTSIdifferenceCons_notRot)
+scatter(currentVariable_notRot,yVelocityTSIdifferenceCons_notRot)
 hold on
-semilogy(currentVariable_notRot,zVelocityTSIdifferenceCons_notRot)
+scatter(currentVariable_notRot,zVelocityTSIdifferenceCons_notRot)
 % hold on
-% semilogy(currentVariable_rot,MassTSIdifferenceCons_rot)
+% scatter(currentVariable_rot,MassTSIdifferenceCons_rot)
 
 
-title(['Consecutive differences non-rotating Mars between ',currentVariableFolder]); % Give the figure a title
+% title(['Consecutive differences non-rotating Mars between ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Consecutive differences [m, m/s, kg]');
+ylabel('Consecutive differences [m, m/s]');
 
-legend('x-Position','y-Position','z-Position','x-Velocity','y-Velocity','z-Velocity','Mass','Location','NorthEastOutside'); % Add a legend in the top right corner
+legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
+
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 toc

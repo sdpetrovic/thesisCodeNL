@@ -254,8 +254,8 @@ scatter(currentVariable_rot,cpuTimeTSIrot);
 hold on
 scatter(currentVariable_notRot,cpuTimeTSInotRot);
 
-title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
-xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+%title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
+xlabel(['Nominal run number ',currentVariableUnit]); % Label the different axes
 ylabel('CPU time TSI [sec]');
 
 % axis([currentVariable(1) currentVariable(end) 0.05 0.1]) % First zoom
@@ -277,7 +277,7 @@ plot(currentVariable_rot,wallTimeTSIrot);
 hold on
 plot(currentVariable_notRot,wallTimeTSInotRot);
 
-title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
+%title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Wall time TSI [sec]');
 
@@ -305,7 +305,7 @@ scatter(functionEvaluationsTSInotRot,cpuTimeTSInotRot)
 
 % plot(functionEvaluationsTSI,cpuTimeTSI)
 
-title(['Function evaluations vs CPU time TSI']); % Give the figure a title
+%title(['Function evaluations vs CPU time TSI']); % Give the figure a title
 xlabel('Function evaluations [-]');
 ylabel('CPU time TSI [sec]'); % Label the different axes
 
