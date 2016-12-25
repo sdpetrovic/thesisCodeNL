@@ -708,6 +708,9 @@ std::cout<<setprecision(15)<<"Setting output precision to 15"<<std::endl;
         /// Debug ///
 
 //        std::cout<<"/// Debug ///"<<std::endl;
+//        std::cout<<"Height in km MOLA = "<<updatedStateAndTimeVectorRKFTSI(0)-Mars.bodyReferenceRadius()<<std::endl;
+//        std::cout<<"Height in km from launch altitude = "<<updatedStateAndTimeVectorRKFTSI(0)-(Mars.bodyReferenceRadius()-0.6)<<std::endl;
+
 //        std::cout<<"CartesianPositionInertialFrameRKF = "<<CartesianPositionInertialFrameRKF<<std::endl;
 //        std::cout<<"CartesianPositionRotationalFrameRKF = "<<CartesianPositionRotationalFrameRKF<<std::endl;
 //        std::cout<<"angleItoR_1 = "<<angleItoR_1<<std::endl;
@@ -1154,6 +1157,7 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 //     }; // end of for-loop
 //     std::cout<<"runningTimeTSI = "<<runningTimeTSI<<std::endl;
 //     std::cout<<"endTimeTSI = "<<endTimeTSI<<std::endl;
+//     std::cout<<"endTimeTSI - runningTimeTSI = "<<endTimeTSI - runningTimeTSI<<std::endl;
 
     }while( !( endTimeTSI - runningTimeTSI <= std::numeric_limits< double >::epsilon( ) ) &&  !((currentSphericalStateAndTime.getCurrentSphericalRadius()-bodyReferenceRadius) >= EndAltitude) && !(fabs(currentFPA)<=FPAaccuracyLimit));
 
@@ -1476,7 +1480,7 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 
                     double coastStartTimeRKF; // used for the initial RKF loop
 
-                    if (coastStartTime>=setEndTime){
+                    if (coastStartTime>= endTime){
                         coastStartTimeRKF = endTime;
 
                     }
@@ -1757,6 +1761,10 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 
                         count++;
 
+//                        std::cout<<"runningTime = "<<runningTime<<std::endl;
+//                        std::cout<<"coastStartTimeRKF = "<<coastStartTimeRKF<<std::endl;
+//                        std::cout<<"coastStartTimeRKF - runningTime = "<<coastStartTimeRKF - runningTime<<std::endl;
+
 
                     }while( !( coastStartTimeRKF - runningTime <= std::numeric_limits< double >::epsilon( ) ) &&  !((outputVectorSpherical(1)-bodyReferenceRadius) >= EndAltitude) );
 
@@ -2034,6 +2042,10 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
                     //std::cout<<"Current count = "<<count<<std::endl;
 //                                            std::cout<<"(outputVectorSpherical(1)-bodyReferenceRadius) = "<<(outputVectorSpherical(1)-bodyReferenceRadius)<<std::endl;
                                             count++;
+
+                                            std::cout<<"runningTime = "<<runningTime<<std::endl;
+                                            std::cout<<"endTime = "<<endTime<<std::endl;
+                                            std::cout<<"endTime - runningTime = "<<endTime - runningTime<<std::endl;
 
 
                                         }while( !( endTime - runningTime <= std::numeric_limits< double >::epsilon( ) ) &&  !((outputVectorSpherical(1)-bodyReferenceRadius) >= EndAltitude) );
@@ -2350,7 +2362,7 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 ///////////////////////////// Output /////////////////////////////
 // Test the output
 
-    Eigen::MatrixXd integrationEndStatesAndInfo = Eigen::MatrixXd::Zero(6,8); // Create an empty matrix
+    Eigen::MatrixXd integrationEndStatesAndInfo = Eigen::MatrixXd::Zero(8,8); // Create an empty matrix
 
     // TSI cartesian end state
     integrationEndStatesAndInfo(0,0) = currentStateAndTime.getCurrentTime();    // end time
@@ -2409,6 +2421,26 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
     integrationEndStatesAndInfo(5,4) = differenceEnd(4); // Difference in y-velocity
     integrationEndStatesAndInfo(5,5) = differenceEnd(5); // Difference in z-velocity
     integrationEndStatesAndInfo(5,6) = differenceEnd(6); // Difference in mass
+
+    // TSI spherical end state
+    integrationEndStatesAndInfo(6,0) = currentStateAndTime.getCurrentTime();    // end time
+    integrationEndStatesAndInfo(6,1) = outputVectorTSI(1);      // radius
+    integrationEndStatesAndInfo(6,2) = outputVectorTSI(2);      // latitude
+    integrationEndStatesAndInfo(6,3) = outputVectorTSI(3);      // longitude
+    integrationEndStatesAndInfo(6,4) = outputVectorTSI(4);      // ground velocity
+    integrationEndStatesAndInfo(6,5) = outputVectorTSI(5);      // flight-path angle
+    integrationEndStatesAndInfo(6,6) = outputVectorTSI(6);      // azimuth angle
+    integrationEndStatesAndInfo(6,7) = outputVectorTSI(7);      // MAV mass
+
+    // RKF spherical end state
+    integrationEndStatesAndInfo(7,0) = currentStateAndTime.getCurrentTime();    // end time
+    integrationEndStatesAndInfo(7,1) = outputVectorSpherical(1);      // radius
+    integrationEndStatesAndInfo(7,2) = outputVectorSpherical(2);      // latitude
+    integrationEndStatesAndInfo(7,3) = outputVectorSpherical(3);      // longitude
+    integrationEndStatesAndInfo(7,4) = outputVectorSpherical(4);      // ground velocity
+    integrationEndStatesAndInfo(7,5) = outputVectorSpherical(5);      // flight-path angle
+    integrationEndStatesAndInfo(7,6) = outputVectorSpherical(6);      // azimuth angle
+    integrationEndStatesAndInfo(7,7) = outputVectorSpherical(7);      // MAV mass
 
 
 

@@ -159,11 +159,11 @@ int main()
 
     /// Input file ///
 
-    int Case = 2;  // Case 1 = Ryan, Case 2 = Joel
+    int Case = 1;  // Case 1 = Ryan, Case 2 = Joel
 
     std::string nameOfFile; // Declare the name of the file string
     std::string caseName; // Declare the case name used for the file location
-    const std::string currentVariable = "headingAngle"; // Delcaare the current variable that is changed
+    const std::string currentVariable = "test"; // Delcaare the current variable that is changed
 
     /* List of possible variable names
      *
@@ -258,10 +258,10 @@ int main()
     const double initialLatitudeDeg =       inputVectorValues(3);
     const double initialLongitudeDeg =      inputVectorValues(4);
 
-    const double FlightPathAngleDeg =       inputVectorValues(5);
+//    const double FlightPathAngleDeg =       inputVectorValues(5);
 //    const double FlightPathAngleDeg = 89;
 
-//    const double HeadingAngleDeg =          inputVectorValues(6);
+    const double HeadingAngleDeg =          inputVectorValues(6);
 
     const double initialGroundVelocity =    inputVectorValues(7);
 //    const double initialGroundVelocity = 1e-6;
@@ -284,10 +284,10 @@ int main()
 
 //    const double setEndTime =               inputVectorValues(17);
 
-//    const double setEndTime = 20000;        // Case for determination of when zero FPA is reached
+    const double setEndTime = 20000;        // Case for determination of when zero FPA is reached
 
 
-    const double setEndTime = 1796;         // End time for tests for Ryans case 1 (For state accuracy)
+//    const double setEndTime = 1796;         // End time for tests for Ryans case 1 (For state accuracy)
 //    const double setEndTime = 789;          // End time for tests for Ryans case 1 (For state accuracy) for non rotating planet. Also used for comparison between rotating and non-rotating
 //    const double setEndTime = 1543;
 //    const double setEndTime = 1795;
@@ -332,8 +332,8 @@ int main()
     const int orderStepSize = 2;
 //    const double numberOfRuns = (maximumFinalOrder+1-initialOrder)/orderStepSize; // Number of runs that order will be changed and evaluated
     const double numberOfRuns = (maximumFinalOrder-initialOrder)/orderStepSize+1;
-    Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,28); // Creating the output matrix for TSI
-    Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,14); // Creating the ouptut matrix for RKF
+    Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,30); // Creating the output matrix for TSI
+    Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,16); // Creating the ouptut matrix for RKF
     int run = 0;    // Initual run counter to be used in the storing of the output
 
 
@@ -422,8 +422,8 @@ int main()
 
          double maxOrder = 0; // The actual parameter
 
-         Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,28); // Creating the output matrix for TSI
-         Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,14); // Creating the ouptut matrix for RKF
+         Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,30); // Creating the output matrix for TSI
+         Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,16); // Creating the ouptut matrix for RKF
          int run = 0;    // Initual run counter to be used in the storing of the output
 
 
@@ -461,8 +461,8 @@ int main()
 
 //        const double orderStepSize = 0.1;
 
-        Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,28); // Creating the output matrix for TSI
-        Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,14); // Creating the ouptut matrix for RKF
+        Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,30); // Creating the output matrix for TSI
+        Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,16); // Creating the ouptut matrix for RKF
         int run = 0;    // Initual run counter to be used in the storing of the output
 
 
@@ -503,8 +503,8 @@ int main()
     double initialAltitude = 0; // The actual parameter
 
 
-    Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,28); // Creating the output matrix for TSI
-    Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,14); // Creating the ouptut matrix for RKF
+    Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,30); // Creating the output matrix for TSI
+    Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,16); // Creating the ouptut matrix for RKF
     int run = 0;    // Initual run counter to be used in the storing of the output
 
 
@@ -616,8 +616,8 @@ int main()
 
 
 
-    Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,28); // Creating the output matrix for TSI
-    Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,14); // Creating the ouptut matrix for RKF
+    Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,30); // Creating the output matrix for TSI
+    Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,16); // Creating the ouptut matrix for RKF
     int run = 0;    // Initual run counter to be used in the storing of the output
 
 
@@ -631,7 +631,7 @@ int main()
     //*/  //// Initial Latitude ///
 
 
- /*     //// Initial Longitude ////
+  /*    //// Initial Longitude ////
         const double numberOfRuns = 12;
 
         Eigen::VectorXd initialLongitudeVector = Eigen::VectorXd::Zero(numberOfRuns);
@@ -658,8 +658,8 @@ int main()
 
 
 
-        Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,28); // Creating the output matrix for TSI
-        Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,14); // Creating the ouptut matrix for RKF
+        Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,30); // Creating the output matrix for TSI
+        Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,16); // Creating the ouptut matrix for RKF
         int run = 0;    // Initual run counter to be used in the storing of the output
 
 
@@ -678,14 +678,19 @@ int main()
 
            Eigen::VectorXd FPAVector = Eigen::VectorXd::Zero(numberOfRuns);
 
-//           // Case 1
-//           FPAVector(0) = 89;
-//           FPAVector(1) = 88;
-//           FPAVector(2) = 87;
+           if (Case == 1){
+           // Case 1
+           FPAVector(0) = 89.5;
+           FPAVector(1) = 89;
+           FPAVector(2) = 88.5;
+           FPAVector(3) = 88;
+           FPAVector(4) = 87.5;
+           FPAVector(5) = 87;
+           FPAVector(6) = 86.5;
+}
 
 
-
-
+            else if (Case == 2){
            // Case 2
            FPAVector(0) = 89;
            FPAVector(1) = 88;
@@ -694,10 +699,7 @@ int main()
            FPAVector(4) = 85;
            FPAVector(5) = 84;
            FPAVector(6) = 83;
-
-
-
-
+}
 
 
 
@@ -705,8 +707,8 @@ int main()
 
 
 
-           Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,28); // Creating the output matrix for TSI
-           Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,14); // Creating the ouptut matrix for RKF
+           Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,30); // Creating the output matrix for TSI
+           Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,16); // Creating the ouptut matrix for RKF
            int run = 0;    // Initual run counter to be used in the storing of the output
 
 
@@ -718,7 +720,7 @@ int main()
 
            //*/  //// FPA ///
 
-    //// Heading angle ////
+/*    //// Heading angle ////
                const double numberOfRuns = 12;
 
                Eigen::VectorXd headingAngleVector = Eigen::VectorXd::Zero(numberOfRuns);
@@ -761,8 +763,8 @@ int main()
 
 
 
-               Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,28); // Creating the output matrix for TSI
-               Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,14); // Creating the ouptut matrix for RKF
+               Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,30); // Creating the output matrix for TSI
+               Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,16); // Creating the ouptut matrix for RKF
                int run = 0;    // Initual run counter to be used in the storing of the output
 
 
@@ -796,8 +798,8 @@ int main()
 
 
 
-                   Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,28); // Creating the output matrix for TSI
-                   Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,14); // Creating the ouptut matrix for RKF
+                   Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,30); // Creating the output matrix for TSI
+                   Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,16); // Creating the ouptut matrix for RKF
                    int run = 0;    // Initual run counter to be used in the storing of the output
 
 
@@ -810,10 +812,12 @@ int main()
                    //*/  //// Ground velocity ///
 
 
-/*  //// Normal run ////
+  //// Normal run ////
 
     const double numberOfRuns = 1; // These are the actual number of runs that are done
-    const double maxOrder = 22;
+//    const double maxOrder = 20;
+    const double FlightPathAngleDeg = 90;
+//    const double setEndTime = 2;
 
     Eigen::VectorXd differentEndTimes = Eigen::VectorXd::Zero(numberOfRuns);
 
@@ -829,15 +833,15 @@ int main()
 
 
 
-    double setEndTime = 0; // The actual parameter
+//    double setEndTime = 0; // The actual parameter
 
-    Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,28); // Creating the output matrix for TSI
-    Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,14); // Creating the ouptut matrix for RKF
+    Eigen::MatrixXd outputMatrixTSI = Eigen::MatrixXd::Zero(numberOfRuns,30); // Creating the output matrix for TSI
+    Eigen::MatrixXd outputMatrixRKF = Eigen::MatrixXd::Zero(numberOfRuns,16); // Creating the ouptut matrix for RKF
     int run = 0;    // Initual run counter to be used in the storing of the output
 
     for (int i = 0; i<numberOfRuns; i++){
-        setEndTime = differentEndTimes(i);
-        std::cout<<"setEndTime = "<<setEndTime<<std::endl;
+//        setEndTime = differentEndTimes(i);
+//        std::cout<<"setEndTime = "<<setEndTime<<std::endl;
 
 
  //*/   //// Normal run ////
@@ -856,7 +860,7 @@ int main()
                                                           constantThrustElevationAngle,constantThrustAzimuthAngle,maxOrder,
                                                           chosenLocalErrorTolerance,chosenStepSize,setEndTime,RKFinitiaterTime,rotatingPlanet,GravityAcc,ThrustAcc,DragAcc,comparison);
 
-    std::cout<<"outputMatrix = "<<outputMatrix<<std::endl;
+//    std::cout<<"outputMatrix = "<<outputMatrix<<std::endl;
 
 //////////////////////////////////////////////////////////////////////// Output //////////////////////////////////////////////////////////////////////////////////////////////////
 /*    // TSI cartesian end state
@@ -917,6 +921,26 @@ int main()
     integrationEndStatesAndInfo(5,5) = differenceEnd(5); // Difference in z-velocity
     integrationEndStatesAndInfo(5,6) = differenceEnd(6); // Difference in mass
 
+    // TSI spherical end state
+    integrationEndStatesAndInfo(6,0) = currentStateAndTime.getCurrentTime();    // end time
+    integrationEndStatesAndInfo(6,1) = outputVectorTSI(1);      // radius
+    integrationEndStatesAndInfo(6,2) = outputVectorTSI(2);      // latitude
+    integrationEndStatesAndInfo(6,3) = outputVectorTSI(3);      // longitude
+    integrationEndStatesAndInfo(6,4) = outputVectorTSI(4);      // ground velocity
+    integrationEndStatesAndInfo(6,5) = outputVectorTSI(5);      // flight-path angle
+    integrationEndStatesAndInfo(6,6) = outputVectorTSI(6);      // azimuth angle
+    integrationEndStatesAndInfo(6,7) = outputVectorTSI(7);      // MAV mass
+
+    // RKF spherical end state
+    integrationEndStatesAndInfo(7,0) = currentStateAndTime.getCurrentTime();    // end time
+    integrationEndStatesAndInfo(7,1) = outputVectorSpherical(1);      // radius
+    integrationEndStatesAndInfo(7,2) = outputVectorSpherical(2);      // latitude
+    integrationEndStatesAndInfo(7,3) = outputVectorSpherical(3);      // longitude
+    integrationEndStatesAndInfo(7,4) = outputVectorSpherical(4);      // ground velocity
+    integrationEndStatesAndInfo(7,5) = outputVectorSpherical(5);      // flight-path angle
+    integrationEndStatesAndInfo(7,6) = outputVectorSpherical(6);      // azimuth angle
+    integrationEndStatesAndInfo(7,7) = outputVectorSpherical(7);      // MAV mass
+
 //*/    /// Output ///
 
     /// Storing the output TSI
@@ -926,8 +950,8 @@ int main()
 //    outputMatrixTSI(run,0) = chosenLocalErrorTolerance;
 //    outputMatrixTSI(run,0) = initialAltitude;
 //        outputMatrixTSI(run,0) = initialLatitudeDeg;
-//        outputMatrixTSI(run,0) = FlightPathAngleDeg;
-        outputMatrixTSI(run,0) = HeadingAngleDeg;
+        outputMatrixTSI(run,0) = FlightPathAngleDeg;
+//        outputMatrixTSI(run,0) = HeadingAngleDeg;
     //    outputMatrixTSI(run,0) = initialGroundVelocity;
 //            outputMatrixTSI(run,0) = run+1;
 
@@ -968,6 +992,12 @@ int main()
     // In case of circularisation:
     outputMatrixTSI(run,27) = outputMatrix(2,4); // The propellant mass used for the circularisation burn of TSI
 
+    // Spherical end state
+    outputMatrixTSI(run,28) = outputMatrix(6,1); // Radius
+    outputMatrixTSI(run,29) = outputMatrix(6,4); // Ground velocity
+
+//    std::cout<<"ouputMatrixTSI = "<<outputMatrixTSI<<std::endl;
+
     /// Storing the output RKF
 
     outputMatrixRKF(run,0) = outputMatrixTSI(run,0);
@@ -989,6 +1019,10 @@ int main()
 
     // In case of circularisation:
     outputMatrixRKF(run,13) = outputMatrix(2,5); // The propellant mass used for the circularisation burn of RKF
+
+    // Spherical end state
+    outputMatrixRKF(run,14) = outputMatrix(7,1); // Radius
+    outputMatrixRKF(run,15) = outputMatrix(7,4); // Ground velocity
 
 
 

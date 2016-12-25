@@ -44,7 +44,7 @@ currentVariableFolder = 'headingAngle';
 
 
 
-currentVariableUnit = '[-]';
+currentVariableUnit = '[Deg]';
 currentCaseFolder = 'Case1';
 filePref = 0; % Choose a different file from the last one. So if this number is 1, you choose the penultimate file etc.
 
@@ -175,6 +175,11 @@ MassTSI = VariableVectorTSI(:,13); % Mass TSI [kg]
 % Required propellant mass to circularize and reach desired inclination
 propMassTSI = VariableVectorTSI(:,28); % TSI required propellant mass [kg]
 
+% Spherical TSI
+radiusTSIrot = VariableVectorTSI(:,29); % Radius [km]
+groundVelocityTSIrot = VariableVectorTSI(:,30); % Ground velocity [km/s]
+inertialVelocityTSIrot = sqrt(xVelocityTSI.*xVelocityTSI+yVelocityTSI.*yVelocityTSI+zVelocityTSI.*zVelocityTSI); % Inertial velocity [km/s]
+
 
 % Accuracy of the results and speed of convergence
 TruthTSI = VariableVectorTSI(1,7:13);
@@ -236,7 +241,7 @@ figure(1) % CPU time
 scatter(currentVariable,cpuTimeTSI);
 hold on
 
-title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
+%title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('CPU time TSI [sec]');
 
@@ -257,7 +262,7 @@ figure(2) % Wall time
 plot(currentVariable,wallTimeTSI);
 hold on
 
-title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
+%title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Wall time TSI [sec]');
 
@@ -277,7 +282,7 @@ figure(3) % Position
 plot(currentVariable,xPositionTSI)
 hold on
 
-title(['x-Position vs ',currentVariableFolder]); % Give the figure a title
+%title(['x-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('x-Position [km]');
 
@@ -316,7 +321,7 @@ figure(4)
 plot(currentVariable,yPositionTSI)
 hold on
 
-title(['y-Position vs ',currentVariableFolder]); % Give the figure a title
+%title(['y-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('y-Position [km]');
 
@@ -353,7 +358,7 @@ figure(5)
 plot(currentVariable,zPositionTSI)
 hold on
 
-title(['z-Position vs ',currentVariableFolder]); % Give the figure a title
+%title(['z-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('z-Position [km]');
 
@@ -393,7 +398,7 @@ hold on
 % hold on
 % plot(currentVariable,zVelocityTSI)
 
-title(['x-Velocity vs ',currentVariableFolder]); % Give the figure a title
+%title(['x-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('x-Velocity [km]');
 
@@ -430,7 +435,7 @@ figure(7)
 plot(currentVariable,yVelocityTSI)
 hold on
 
-title(['y-Velocity vs ',currentVariableFolder]); % Give the figure a title
+%title(['y-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('y-Velocity [km]');
 
@@ -467,7 +472,7 @@ figure(8)
 plot(currentVariable,zVelocityTSI)
 hold on
 
-title(['z-Velocity vs ',currentVariableFolder]); % Give the figure a title
+%title(['z-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('z-Velocity [km]');
 
@@ -505,7 +510,7 @@ figure(9)
 plot(currentVariable,functionEvaluationsTSI)
 hold on
 
-title(['Function evaluations vs ',currentVariableFolder]); % Give the figure a title
+%title(['Function evaluations vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Function evaluations [-]');
 
@@ -553,7 +558,7 @@ hold on
 
 % plot(functionEvaluationsTSI,cpuTimeTSI)
 
-title(['Function evaluations vs CPU time TSI']); % Give the figure a title
+%title(['Function evaluations vs CPU time TSI']); % Give the figure a title
 xlabel('Function evaluations [-]');
 ylabel('CPU time TSI [sec]'); % Label the different axes
 
@@ -584,9 +589,9 @@ hold on
 % semilogy(currentVariable,MassTSIdifference)
 
 
-title(['Absolute differences w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
+%title(['Absolute differences w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference difference [m, m/s, kg]');
+ylabel('Absolute difference difference [m, m/s]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
@@ -607,9 +612,9 @@ hold on
 % semilogy(currentVariable,MassTSIdifferenceRKF)
 
 
-title(['Absolute differences w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
+%title(['Absolute differences w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference difference [m, m/s, kg]');
+ylabel('Absolute difference difference [m, m/s]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
@@ -631,9 +636,9 @@ hold on
 % semilogy(currentVariable,MassTSIdifferenceCons)
 
 
-title(['Consecutive differences between ',currentVariableFolder]); % Give the figure a title
+%title(['Consecutive differences between ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Consecutive differences [m, m/s, kg]');
+ylabel('Consecutive differences [m, m/s]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
@@ -646,7 +651,7 @@ figure(14)
 plot(currentVariable,propMassTSI)
 hold on
 
-title(['Required propellant mass vs ',currentVariableFolder]); % Give the figure a title
+%title(['Required propellant mass vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Required propellant mass [kg]');
 
@@ -782,6 +787,11 @@ MassTSI = VariableVectorTSI(:,13); % Mass TSI [kg]
 % Required propellant mass to circularize and reach desired inclination
 propMassTSI = VariableVectorTSI(:,28); % TSI required propellant mass [kg]
 
+% Spherical TSI
+radiusTSInotRot = VariableVectorTSI(:,29); % Radius [km]
+groundVelocityTSInotRot = VariableVectorTSI(:,30); % Ground velocity [km/s]
+inertialVelocityTSInotRot = sqrt(xVelocityTSI.*xVelocityTSI+yVelocityTSI.*yVelocityTSI+zVelocityTSI.*zVelocityTSI); % Inertial velocity [km/s]
+
 
 % Accuracy of the results and speed of convergence
 TruthTSI = VariableVectorTSI(1,7:13);
@@ -842,7 +852,7 @@ end
 figure(1) % CPU time
 scatter(currentVariable,cpuTimeTSI);
 
-title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
+%title(['CPU time TSI vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('CPU time TSI [sec]');
 
@@ -862,7 +872,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(2) % Wall time
 plot(currentVariable,wallTimeTSI);
 
-title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
+%title(['Wall time TSI vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Wall time TSI [sec]');
 
@@ -881,7 +891,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(3) % Position
 plot(currentVariable,xPositionTSI)
 
-title(['x-Position vs ',currentVariableFolder]); % Give the figure a title
+%title(['x-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('x-Position [km]');
 
@@ -919,7 +929,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(4)
 plot(currentVariable,yPositionTSI)
 
-title(['y-Position vs ',currentVariableFolder]); % Give the figure a title
+%title(['y-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('y-Position [km]');
 
@@ -955,7 +965,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(5)
 plot(currentVariable,zPositionTSI)
 
-title(['z-Position vs ',currentVariableFolder]); % Give the figure a title
+%title(['z-Position vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('z-Position [km]');
 
@@ -995,7 +1005,7 @@ plot(currentVariable,xVelocityTSI)
 % hold on
 % plot(currentVariable,zVelocityTSI)
 
-title(['x-Velocity vs ',currentVariableFolder]); % Give the figure a title
+%title(['x-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('x-Velocity [km]');
 
@@ -1031,7 +1041,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(7)
 plot(currentVariable,yVelocityTSI)
 
-title(['y-Velocity vs ',currentVariableFolder]); % Give the figure a title
+%title(['y-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('y-Velocity [km]');
 
@@ -1067,7 +1077,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(8)
 plot(currentVariable,zVelocityTSI)
 
-title(['z-Velocity vs ',currentVariableFolder]); % Give the figure a title
+%title(['z-Velocity vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('z-Velocity [km]');
 
@@ -1104,7 +1114,7 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(9)
 plot(currentVariable,functionEvaluationsTSI)
 
-title(['Function evaluations vs ',currentVariableFolder]); % Give the figure a title
+%title(['Function evaluations vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Function evaluations [-]');
 
@@ -1152,7 +1162,7 @@ polyvalNumber = polyval(myPoly,polyRange);
 
 % plot(functionEvaluationsTSI,cpuTimeTSI)
 
-title(['Function evaluations vs CPU time TSI']); % Give the figure a title
+%title(['Function evaluations vs CPU time TSI']); % Give the figure a title
 xlabel('Function evaluations [-]');
 ylabel('CPU time TSI [sec]'); % Label the different axes
 
@@ -1184,9 +1194,9 @@ scatter(currentVariable,zVelocityTSIdifference)
 % scatter(currentVariable,MassTSIdifference)
 
 
-title(['Absolute differences w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
+%title(['Absolute differences w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference difference [m, m/s, kg]');
+ylabel('Absolute difference difference [m, m/s]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
@@ -1207,9 +1217,9 @@ scatter(currentVariable,zVelocityTSIdifferenceRKF)
 % scatter(currentVariable,MassTSIdifferenceRKF)
 
 
-title(['Absolute differences w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
+%title(['Absolute differences w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference difference [m, m/s, kg]');
+ylabel('Absolute difference difference [m, m/s]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
@@ -1231,9 +1241,9 @@ scatter(currentVariable,zVelocityTSIdifferenceCons)
 % scatter(currentVariable,MassTSIdifferenceCons)
 
 
-title(['Consecutive differences between ',currentVariableFolder]); % Give the figure a title
+%title(['Consecutive differences between ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Consecutive differences [m, m/s, kg]');
+ylabel('Consecutive differences [m, m/s]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
@@ -1245,13 +1255,97 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 figure(14)
 plot(currentVariable,propMassTSI)
 
-title(['Required propellant mass vs ',currentVariableFolder]); % Give the figure a title
+%title(['Required propellant mass vs ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
 ylabel('Required propellant mass [kg]');
 
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
+
+%%%%%%% Spherical %%%%%%%%%
+
+figure(15)
+plot(currentVariable,radiusTSIrot)
+hold on
+plot(currentVariable,radiusTSInotRot)
+
+
+%%title(['Required propellant mass vs ',currentVariableFolder]); % Give the figure a title
+xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+ylabel('Radius [km]');
+
+legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
+
+figure(16)
+plot(currentVariable,groundVelocityTSIrot)
+hold on
+plot(currentVariable,groundVelocityTSInotRot)
+hold on
+scatter(currentVariable,inertialVelocityTSIrot)
+hold on
+scatter(currentVariable,inertialVelocityTSInotRot)
+
+
+
+%%title(['Required propellant mass vs ',currentVariableFolder]); % Give the figure a title
+xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+ylabel('Velocity [km/s]');
+
+legend('V_G Rotating','V_G Non rotating','V_I Rotating','V_I Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
+
+figure(17)
+semilogy(currentVariable,abs(radiusTSIrot-radiusTSInotRot))
+
+
+%%title(['Required propellant mass vs ',currentVariableFolder]); % Give the figure a title
+xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+ylabel('Absolute radius difference [km]');
+
+% legend('Radius','Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
+
+figure(18)
+semilogy(currentVariable,abs(groundVelocityTSIrot-groundVelocityTSInotRot))
+% hold on
+% plot(currentVariable,abs(inertialVelocityTSIrot-inertialVelocityTSInotRot))
+
+
+%%title(['Required propellant mass vs ',currentVariableFolder]); % Give the figure a title
+xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+ylabel('Absolute velocity difference [km/s]');
+
+% legend('Radius','Velocity','Location','NorthEastOutside'); % Add a legend in the top right corner
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
+
+figure(19)
+semilogy(currentVariable,radiusTSIrot-3395.4)
+hold on
+semilogy(currentVariable,radiusTSInotRot-3395.4)
+
+
+%%title(['Required propellant mass vs ',currentVariableFolder]); % Give the figure a title
+xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+ylabel('Height from launch altitude [km]');
+
+legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
+
+
+figure(20)
+plot(currentVariable,radiusTSIrot-3396)
+hold on
+plot(currentVariable,radiusTSInotRot-3396)
+
+
+%%title(['Required propellant mass vs ',currentVariableFolder]); % Give the figure a title
+xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+ylabel('Altitude [km MOLA]');
+
+legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 toc
 

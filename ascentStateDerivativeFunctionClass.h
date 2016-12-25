@@ -159,7 +159,17 @@ public:
 
     // Computations
 
-        const double Radius = sqrt(xPosition*xPosition+yPosition*yPosition+zPosition*zPosition);         // r [km]
+        double radiusPlaceholder;
+
+        if (currentTime == 0.0){
+            radiusPlaceholder = 3395.4;
+
+        }
+        else{
+            radiusPlaceholder = sqrt(xPosition*xPosition+yPosition*yPosition+zPosition*zPosition);
+        }
+
+        const double Radius =  radiusPlaceholder;        // r [km]
 
         const double inertialVelocity = sqrt(xVelocity*xVelocity+yVelocity*yVelocity+zVelocity*zVelocity);       // V_I [km/s]
 
@@ -439,7 +449,7 @@ public:
 
        // Check output
         std::cout<<"///////////////////////////////////////////////////////////////////////////////////////////////////"<<std::endl;
-        std::cout<<"Radius = "<<Radius<<std::endl;
+//        std::cout<<"Radius = "<<Radius<<std::endl;
         std::cout<<"inertialVelocity = "<<inertialVelocity<<std::endl;
 //        std::cout<<"inertialLongitude = "<<inertialLongitude<<std::endl;
         std::cout<<"Latitude = "<<Latitude<<std::endl;
@@ -464,12 +474,36 @@ public:
 
     /// Testing the local air temperature function ///
 
+//        if (Radius-3395.4 <= 1e-12 ){
+//            std::cout<<"It does read it as such..."<<std::endl;
+////            Radius = 3395.4;
+//        }
+
+
         const double currentAltitude = Radius-Mars.bodyReferenceRadius();
+
+//         std::cout<<"Radius = "<<Radius<<std::endl;
+//         std::cout<<"Radius-3395.4 = "<<Radius-3395.4<<std::endl;
+//         std::cout<<"Mars.bodyReferenceRadius = "<<Mars.bodyReferenceRadius()<<std::endl;
+//         std::cout<<"Mars.bodyReferenceRadius-3396 = "<<Mars.bodyReferenceRadius()-3396<<std::endl;
+//         int intRadius = Radius*10;
+//         double doubleRadiusInt = intRadius;
+//         double doubleRadius = doubleRadiusInt/10;
+//         std::cout<<"intRadius = "<<intRadius<<std::endl;
+//         std::cout<<"doubleRadiusInt = "<<doubleRadiusInt<<std::endl;
+//         std::cout<<"doubleRadius = "<<doubleRadius<<std::endl;
+//         std::cout<<"doubleRadius-3395.4 = "<<doubleRadius-3395.4<<std::endl;
+
+
+
+
+
 
         const double currentTemperature = air_temperature::airTemperature(Mars.temperaturePolyCoefficients(), Mars.temperatureAltitudeRanges(),currentAltitude);
 
- /*      // Check output
+/*       // Check output
         std::cout<<"currentAltitude = "<<currentAltitude<<std::endl;
+        std::cout<<"currentTime = "<<currentTime<<std::endl;
         std::cout<<"currentTemperature = "<<currentTemperature<<std::endl;
         std::cout<<"Radius = "<<Radius<<std::endl;
         std::cout<<"R_MOLA = "<<Mars.bodyReferenceRadius()<<std::endl;

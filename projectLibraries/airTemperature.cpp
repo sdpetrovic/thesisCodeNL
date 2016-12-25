@@ -39,8 +39,10 @@ namespace air_temperature
 
 const double airTemperature(const Eigen::MatrixXd temperaturePolyCoefficients, const Eigen::MatrixXd temperatureAltitudeRanges, double altitude){
 
-    if (altitude <= -0.6){
-        std::cerr<<"You have gone through the planet! The temperature will be set equal to the surface temperature"<<std::endl;
+    if (altitude < -0.6){
+//        std::cout<<"You have gone through the planet! The altitude is "<<altitude<<" km MOLA. The temperature will be set equal to the surface temperature"<<std::endl;
+        std::cerr<<"You have gone through the planet! The altitude is "<<altitude<<" km MOLA. The temperature will be set equal to the surface temperature"<<std::endl;
+
         altitude = -0.6;
     }
 
