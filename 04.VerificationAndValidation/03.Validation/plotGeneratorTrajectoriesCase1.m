@@ -25,10 +25,10 @@ marsRadius = 3396; % [km]
 marsStandardGravitationalParameter = 4.2828314e4;  % mu_M [km^3/s^2]
 
 % Desired orbit parameters
-desiredOrbitSemiMajorAxis = 3875.19000000064;       %marsRadius+390.0; % a [kmMOLA]
+desiredOrbitSemiMajorAxis = marsRadius+390.0; % a [kmMOLA]
 desiredOrbitEccentricity = 0.0; % e [-]
-desiredOrbitInclination = deg2rad(92.6899999999988); % i [rad]
-desiredRAAN = deg2rad(270.816445254247); % Omega [rad]
+desiredOrbitInclination = deg2rad(45); % i [rad]
+desiredRAAN = 1.30693423357019; % Omega [rad]
 desiredArgumentOfPerigee = 0.0; % omega [rad] (3.92078961310322 could be used)
 desiredTrueAnomaly = 0.0; % theta [rad]
 
@@ -68,11 +68,13 @@ end
 %% Get the data
 
 % Specify the paths
-pathToValidationFolder = pwd; % Get the path to the current folder
 
-RKFpath = fullfile('02.Version2SecondValidationTest','backupRKFFileAtDateAndTime_2016-09-06_11:19:12.csv'); % Create the path for the RKF file
-TSIpath = fullfile('02.Version2SecondValidationTest','backupSpherical(Cart)TSIFileAtDateAndTime_2016-09-06_11:19:12.csv'); % Create the path for the TSI file
-referenceDataPath = fullfile('02.Version1SecondValidationTest','trajectoryOutputDataCase7_3_2016_v33.txt'); % Create the path for the reference trajectory
+RKFpath = fullfile('01.Version2.0FirstValidationTest','backupRKFFileAtDateAndTime_2016-09-02_11_18_13.csv'); % Create the path for the RKF file
+TSIpath = fullfile('01.Version2.0FirstValidationTest','backupSpherical(Cart)TSIFileAtDateAndTime_2016-09-02_11_18_12.csv'); % Create the path for the TSI file
+
+% RKFpath = fullfile('01.Version2.0FirstValidationTest','backupRKFFileAtDateAndTime_2016-09-02_11:18:13.csv'); % Create the path for the RKF file
+% TSIpath = fullfile('01.Version2.0FirstValidationTest','backupSpherical(Cart)TSIFileAtDateAndTime_2016-09-02_11:18:12.csv'); % Create the path for the TSI file
+% referenceDataPath = fullfile('02.Version1SecondValidationTest','trajectoryOutputDataCase7_3_2016_v33.txt'); % Create the path for the reference trajectory
 % RKFThrustPath = fullfile('01.Version2.0FirstValidationTest','Thrust.csv'); % Create the path for the RKF thrust file
 
 
@@ -82,7 +84,7 @@ referenceDataPath = fullfile('02.Version1SecondValidationTest','trajectoryOutput
 
 CartesianRKFdata = csvread(RKFpath); % Read the file
 CartesianTSIdata_spher = csvread(TSIpath); % Read the file
-ReferenceData = dlmread(referenceDataPath); % Read the file
+% ReferenceData = dlmread(referenceDataPath); % Read the file
 % ThrustData = csvread(RKFThrustPath); % Read the file
 
 
@@ -104,13 +106,13 @@ TSIxVelocity = CartesianTSIdata_spher(:,5); % TSI x-velocity
 TSIyVelocity = CartesianTSIdata_spher(:,6); % TSI y-velocity
 TSIzVelocity = CartesianTSIdata_spher(:,7); % TSI z-velocity
 
-% Reference trajectory
-RefxPosition = ReferenceData(:,2)*1e-3; % Ref x-position
-RefyPosition = ReferenceData(:,3)*1e-3; % Ref y-position
-RefzPosition = ReferenceData(:,4)*1e-3; % Ref z-position
-RefxVelocity = ReferenceData(:,5)*1e-3; % Ref x-velocity
-RefyVelocity = ReferenceData(:,6)*1e-3; % Ref y-velocity
-RefzVelocity = ReferenceData(:,7)*1e-3; % Ref z-velocity
+% % Reference trajectory
+% RefxPosition = ReferenceData(:,2)*1e-3; % Ref x-position
+% RefyPosition = ReferenceData(:,3)*1e-3; % Ref y-position
+% RefzPosition = ReferenceData(:,4)*1e-3; % Ref z-position
+% RefxVelocity = ReferenceData(:,5)*1e-3; % Ref x-velocity
+% RefyVelocity = ReferenceData(:,6)*1e-3; % Ref y-velocity
+% RefzVelocity = ReferenceData(:,7)*1e-3; % Ref z-velocity
 
 % % RKF Thrust
 % k = 1;
@@ -144,26 +146,28 @@ hold on
 plot3(TSIxPosition,TSIyPosition,TSIzPosition,'b'); % Plot the TSI trajectory
 hold on
 plot3(desiredOrbitXposition,desiredOrbitYposition,desiredOrbitZposition,'k--'); % Plot the desired orbit
-hold on
-plot3(RefxPosition,RefyPosition,RefzPosition,'r--'); % Plot the reference trajectory 
+% hold on
+% plot3(RefxPosition,RefyPosition,RefzPosition,'r--'); % Plot the reference trajectory 
 % hold on
 % quiver3(RKFxPosition,RKFyPosition,RKFzPosition,ThrustXacc,ThrustYacc,ThrustZacc,'r'); % Plot the RKF thrust
 % view(180,0);
 % view(74.5,0); % see the trajectory from the side
 % view(74.5,90);  % see the trajectory from the top
 % view(90,0); % as seen from the x-axis
-% view(180,0); % as seen from the y-axis
-view(0,90); % as seen from the z-axis
+view(180,0); % as seen from the y-axis
+% view(0,90); % as seen from the z-axis
 % view(0,-90); % as seen from the negative z-axis
 
+axis([-3000 1000 500 3500 0 3000]);
 
-axis([-500 2500 3000 4000 -2500 0]); % Set specific axes
 
-title('3-D trajectory plot over Mars'); % Give the figure a title
+% title('3-D trajectory plot over Mars'); % Give the figure a title
 xlabel('x-position [km]'); % Label the different axes
 ylabel('y-position [km]');
 zlabel('z-position [km]');
-legend('Mars','RKF','TSI','Desired orbit','Actual trajectory','Location','NorthEastOutside'); % Add a legend in the top right corner
+% legend('Mars','RKF','TSI','Desired orbit','Location','NorthEastOutside'); % Add a legend in the top right corner
+legend('Mars','RKF','TSI','Desired orbit','Location','SouthEast'); % Add a legend in the bottom right corner inside the graph
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 
 figure(2) % Just the trajectories
@@ -172,16 +176,16 @@ hold on
 plot3(TSIxPosition,TSIyPosition,TSIzPosition,'b'); % Plot the TSI trajectory
 hold on
 plot3(desiredOrbitXposition,desiredOrbitYposition,desiredOrbitZposition,'k--'); % Plot the desired orbit
-hold on
-plot3(RefxPosition,RefyPosition,RefzPosition,'r--'); % Plot the reference trajectory 
+% hold on
+% plot3(RefxPosition,RefyPosition,RefzPosition,'r--'); % Plot the reference trajectory 
 
-axis([-500 2500 3000 4000 -2500 0]); % Set specific axes
+axis([-3000 1000 500 3500 0 3000]); % Set specific axes
 
 title('3-D trajectory plot (trajectories only)'); % Give the figure a title
 xlabel('x-position [km]'); % Label the different axes
 ylabel('y-position [km]');
 zlabel('z-position [km]');
-legend('RKF','TSI','Desired orbit','Actual trajectory','Location','NorthEastOutside'); % Add a legend in the top right corner
+legend('RKF','TSI','Desired orbit','Location','NorthEastOutside'); % Add a legend in the top right corner
 
 % Create the same plots including the velocity 
 figure(3)

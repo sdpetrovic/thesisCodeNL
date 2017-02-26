@@ -68,11 +68,20 @@ end
 %% Get the data
 
 % Specify the paths
-pathToValidationFolder = pwd; % Get the path to the current folder
+% pathToValidationFolder = pwd; % Get the path to the current folder
+pathToValidationFolder = '/home/stachap/Documents/Thesis/03. Tudat/tudatBundle/tudatApplications/thesisProject/04.VerificationAndValidation/03.Validation/';
+% A = dir; % Has all directory data
+% myDir = find(vertcat(A.isdir));
+% A(myDir).name
 
-RKFpath = fullfile('02.Version2SecondValidationTest','backupRKFFileAtDateAndTime_2016-09-06_11:19:12.csv'); % Create the path for the RKF file
-TSIpath = fullfile('02.Version2SecondValidationTest','backupSpherical(Cart)TSIFileAtDateAndTime_2016-09-06_11:19:12.csv'); % Create the path for the TSI file
+RKFpath = fullfile('02.Version2SecondValidationTest','backupRKFFileAtDateAndTime_2016-09-06_11_19_12.csv'); % Create the path for the RKF file
+TSIpath = fullfile('02.Version2SecondValidationTest','backupSpherical(Cart)TSIFileAtDateAndTime_2016-09-06_11_19_12.csv'); % Create the path for the TSI file
 referenceDataPath = fullfile('02.Version1SecondValidationTest','trajectoryOutputDataCase7_3_2016_v33.txt'); % Create the path for the reference trajectory
+% testData = csvread(testPath);
+
+% RKFpath = fullfile(pathToValidationFolder,'02.Version2SecondValidationTest','backupRKFFileAtDateAndTime_2016-09-06_11:19:12.csv'); % Create the path for the RKF file
+%TSIpath = fullfile('02.Version2SecondValidationTest','backupSpherical(Cart)TSIFileAtDateAndTime_2016-09-06_11:19:12.csv'); % Create the path for the TSI file
+%referenceDataPath = fullfile('02.Version1SecondValidationTest','trajectoryOutputDataCase7_3_2016_v33.txt'); % Create the path for the reference trajectory
 % RKFThrustPath = fullfile('01.Version2.0FirstValidationTest','Thrust.csv'); % Create the path for the RKF thrust file
 
 
@@ -152,18 +161,21 @@ plot3(RefxPosition,RefyPosition,RefzPosition,'r--'); % Plot the reference trajec
 % view(74.5,0); % see the trajectory from the side
 % view(74.5,90);  % see the trajectory from the top
 % view(90,0); % as seen from the x-axis
-% view(180,0); % as seen from the y-axis
-view(0,90); % as seen from the z-axis
+view(180,0); % as seen from the y-axis
+% view(0,90); % as seen from the z-axis
 % view(0,-90); % as seen from the negative z-axis
 
 
 axis([-500 2500 3000 4000 -2500 0]); % Set specific axes
 
-title('3-D trajectory plot over Mars'); % Give the figure a title
+% title('3-D trajectory plot over Mars'); % Give the figure a title
 xlabel('x-position [km]'); % Label the different axes
 ylabel('y-position [km]');
 zlabel('z-position [km]');
-legend('Mars','RKF','TSI','Desired orbit','Actual trajectory','Location','NorthEastOutside'); % Add a legend in the top right corner
+% legend('Mars','RKF','TSI','Desired orbit','Actual trajectory','Location','NorthEastOutside'); % Add a legend in the top right corner
+% legend('Mars','RKF','TSI','Desired orbit','Actual trajectory','Location','SouthEast'); % Add a legend in the bottom right corner within the graph
+legend('Mars','RKF','TSI','Desired orbit','Actual trajectory','Location','SouthWest'); % Add a legend in the bottom right corner within the graph
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
 
 figure(2) % Just the trajectories
