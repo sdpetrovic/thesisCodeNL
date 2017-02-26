@@ -177,8 +177,8 @@ int main()
      *  - headingAngle
      *  - groundVelocity
      *  - normalRun
-     *
-     *
+     *  - OriginalTestCaseData
+     *  - test              (USE AS DEFAULT!)
      *
      *
      *
@@ -258,7 +258,7 @@ int main()
     const double initialLatitudeDeg =       inputVectorValues(3);
     const double initialLongitudeDeg =      inputVectorValues(4);
 
-//    const double FlightPathAngleDeg =       inputVectorValues(5);
+    const double FlightPathAngleDeg =       inputVectorValues(5);
 //    const double FlightPathAngleDeg = 89;
 
     const double HeadingAngleDeg =          inputVectorValues(6);
@@ -282,9 +282,9 @@ int main()
     const double chosenStepSize =           inputVectorValues(16);
 
 
-//    const double setEndTime =               inputVectorValues(17);
+    const double setEndTime =               inputVectorValues(17);
 
-    const double setEndTime = 20000;        // Case for determination of when zero FPA is reached
+//    const double setEndTime = 20000;        // Case for determination of when zero FPA is reached
 
 
 //    const double setEndTime = 1796;         // End time for tests for Ryans case 1 (For state accuracy)
@@ -816,19 +816,19 @@ int main()
 
     const double numberOfRuns = 1; // These are the actual number of runs that are done
 //    const double maxOrder = 20;
-    const double FlightPathAngleDeg = 90;
+//    const double FlightPathAngleDeg = 90;
 //    const double setEndTime = 2;
 
-    Eigen::VectorXd differentEndTimes = Eigen::VectorXd::Zero(numberOfRuns);
+//    Eigen::VectorXd differentEndTimes = Eigen::VectorXd::Zero(numberOfRuns);
 
-    double kk = 17.0; // 14.25
-    double stepSizeLoop = 1.0;
-    for (int j = 0; j<numberOfRuns; j++){ // More efficient way to fill the vector
+//    double kk = 17.0; // 14.25
+//    double stepSizeLoop = 1.0;
+//    for (int j = 0; j<numberOfRuns; j++){ // More efficient way to fill the vector
 
-        differentEndTimes(j) = kk;
-        kk = kk+stepSizeLoop;
+//        differentEndTimes(j) = kk;
+//        kk = kk+stepSizeLoop;
 
-    }
+//    }
 
 
 
@@ -946,11 +946,11 @@ int main()
     /// Storing the output TSI
 
 
-//    outputMatrixTSI(run,0) = maxOrder;
+    outputMatrixTSI(run,0) = maxOrder;
 //    outputMatrixTSI(run,0) = chosenLocalErrorTolerance;
 //    outputMatrixTSI(run,0) = initialAltitude;
 //        outputMatrixTSI(run,0) = initialLatitudeDeg;
-        outputMatrixTSI(run,0) = FlightPathAngleDeg;
+//        outputMatrixTSI(run,0) = FlightPathAngleDeg;
 //        outputMatrixTSI(run,0) = HeadingAngleDeg;
     //    outputMatrixTSI(run,0) = initialGroundVelocity;
 //            outputMatrixTSI(run,0) = run+1;

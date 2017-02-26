@@ -827,6 +827,33 @@ set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 %  scatter(currentVariable_notRot,cpuTimeTSI_notRot);
 %  legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 
+
+
+%%%%% Combined graph data
+
+figure(14) % CPU time
+yyaxis left
+plot(currentVariable_rot,cpuTimeTSI_rot);
+
+
+xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
+ylabel('CPU time TSI [sec]');
+
+axis([min(currentVariable_rot) max(currentVariable_rot) 0.0 0.05]) % No live data collection
+% axis([min(currentVariable_rot)  max(currentVariable_rot) 0.08 0.16]) % Live data
+% collection
+
+
+
+set(gca,'FontSize',14);  % Make sure that the graph font size is 14
+
+
+yyaxis right
+semilogy(currentVariable_rot,functionEvaluationsTSI_rot)
+
+
+ylabel('Function evaluations [-]');
+
 toc
 
 

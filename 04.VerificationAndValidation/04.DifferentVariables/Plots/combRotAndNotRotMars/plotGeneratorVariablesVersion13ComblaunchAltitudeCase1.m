@@ -580,7 +580,7 @@ hold on
 
 %title(['Absolute differences w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference difference [m, m/s]');
+ylabel('Absolute difference [m, m/s]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
@@ -603,7 +603,7 @@ hold on
 
 %title(['Absolute differences w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference difference [m, m/s]');
+ylabel('Absolute difference [m, m/s]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
@@ -1170,7 +1170,7 @@ scatter(currentVariable,zVelocityTSIdifference)
 
 %title(['Absolute differences w.r.t. the nominal case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference difference [m, m/s]');
+ylabel('Absolute difference [m, m/s]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
@@ -1194,7 +1194,7 @@ scatter(currentVariable,zVelocityTSIdifferenceRKF)
 
 %title(['Absolute differences w.r.t. the RKF case for every ',currentVariableFolder]); % Give the figure a title
 xlabel([currentVariableFolder,' ',currentVariableUnit]); % Label the different axes
-ylabel('Absolute difference difference [m, m/s]');
+ylabel('Absolute difference [m, m/s]');
 
 legend('x-Position rot','y-Position rot','z-Position rot','x-Velocity rot','y-Velocity rot','z-Velocity rot','x-Position notRot','y-Position notRot','z-Position notRot','x-Velocity notRot','y-Velocity notRot','z-Velocity notRot','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14

@@ -68,6 +68,7 @@ end
 %% Get the data
 
 % Specify the paths
+pathToValidationFolder = 
 
 RKFpath = fullfile('02.Version2SecondValidationTest','backupRKFFileAtDateAndTime_2016-09-06_11:19:12.csv'); % Create the path for the RKF file
 TSIpath = fullfile('02.Version2SecondValidationTest','backupSpherical(Cart)TSIFileAtDateAndTime_2016-09-06_11:19:12.csv'); % Create the path for the TSI file

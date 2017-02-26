@@ -542,8 +542,11 @@ STDadj = std(dummyVector); % Determine the new std (or adjusted, adj)
 legend('Rotating','Non rotating','Location','NorthEastOutside'); % Add a legend in the top right corner
 set(gca,'FontSize',14);  % Make sure that the graph font size is 14
 
-% ybounds = ylim();
-% set(gca, 'ytick', ybounds(1):1:ybounds(2));
+ybounds = ylim();
+set(gca, 'ytick', ybounds(1):1:ybounds(2));
+
+xbounds = xlim();
+set(gca, 'xtick', xbounds(1):100:xbounds(2));
 
 
 figure(10)
