@@ -1550,6 +1550,15 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 //                                      stateDerivativeFunction, initialTime, initialStateRKF, zeroMinimumStepSize,
 //                                      infiniteMaximumStepSize, relativeTolerance, absoluteTolerance );
 
+//                          /// Runge-Kutta-Fehlberg 5(6) integrator.
+//                          std::cout<<"You have chosen RKF5(6) as your integration method"<<std::endl;
+//                          method = "RKF5(6)";
+//                             tudat::numerical_integrators::RungeKuttaVariableStepSizeIntegratorXd integrator(
+//                                         tudat::numerical_integrators::RungeKuttaCoefficients::get(
+//                                             tudat::numerical_integrators::RungeKuttaCoefficients::rungeKuttaFehlberg56),
+//                                         stateDerivativeFunction, initialTime, initialStateRKF, zeroMinimumStepSize,
+//                                         infiniteMaximumStepSize, relativeTolerance, absoluteTolerance );
+
 //                          /// Dormand-Prince 8(7) integrator.
 //                          std::cout<<"You have chosen DOPRIN8(7) as your integration method"<<std::endl;
 //                          method = "DOPRIN8(7)";
@@ -1807,6 +1816,7 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
      runningTime = outputVector(0); // current time
 
 
+     std::cout<<"Intermediate RKF state = "<<newInitialState<<std::endl;
 
                     ////////////////////////// Choose your coasting weapon! I mean integrator... ///////////////////////////////////////////////////////////////////////////////////////////////////////
                     ////////////////////////// Simply uncomment the integrator you want and make sure the others are commented away ///////////////////////////////////////////////////////////
@@ -1835,23 +1845,34 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
                                                        stateDerivativeFunctionCoast, runningTime, newInitialState, zeroMinimumStepSize,
                                                        infiniteMaximumStepSize, relativeTolerance, absoluteTolerance );
 
-                    //                       /// Runge-Kutta-Fehlberg 4(5) integrator.
-                    //                       std::cout<<"You have chosen RKF4(5) as your integration method"<<std::endl;
-                    //                       method = "RKF4(5)";
-                    //                          tudat::numerical_integrators::RungeKuttaVariableStepSizeIntegratorXd integrator(
-                    //                                      tudat::numerical_integrators::RungeKuttaCoefficients::get(
-                    //                                          tudat::numerical_integrators::RungeKuttaCoefficients::rungeKuttaFehlberg45),
-                    //                                      stateDerivativeFunction, initialTime, initialState, zeroMinimumStepSize,
-                    //                                      infiniteMaximumStepSize, relativeTolerance, absoluteTolerance );
+//                                           /// Runge-Kutta-Fehlberg 4(5) integrator.
+//                                           std::cout<<"You have chosen RKF4(5) as your integration method"<<std::endl;
+//                                           method = "RKF4(5)";
+//                                              tudat::numerical_integrators::RungeKuttaVariableStepSizeIntegratorXd integratorCoast(
+//                                                          tudat::numerical_integrators::RungeKuttaCoefficients::get(
+//                                                              tudat::numerical_integrators::RungeKuttaCoefficients::rungeKuttaFehlberg45),
+//                                                          stateDerivativeFunctionCoast, runningTime, newInitialState, zeroMinimumStepSize,
+//                                                          infiniteMaximumStepSize, relativeTolerance, absoluteTolerance );
 
-                    //                          /// Dormand-Prince 8(7) integrator.
-                    //                          std::cout<<"You have chosen DOPRIN8(7) as your integration method"<<std::endl;
-                    //                          method = "DOPRIN8(7)";
-                    //                             tudat::numerical_integrators::RungeKuttaVariableStepSizeIntegratorXd integrator(
-                    //                                         tudat::numerical_integrators::RungeKuttaCoefficients::get(
-                    //                                             tudat::numerical_integrators::RungeKuttaCoefficients::rungeKutta87DormandPrince),
-                    //                                         stateDerivativeFunction, initialTime, initialState, zeroMinimumStepSize,
-                    //                                         infiniteMaximumStepSize, relativeTolerance, absoluteTolerance );
+//                                              /// Runge-Kutta-Fehlberg 5(6) integrator.
+//                                              std::cout<<"You have chosen RKF5(6) as your integration method"<<std::endl;
+//                                              method = "RKF5(6)";
+//                                                 tudat::numerical_integrators::RungeKuttaVariableStepSizeIntegratorXd integratorCoast(
+//                                                             tudat::numerical_integrators::RungeKuttaCoefficients::get(
+//                                                                 tudat::numerical_integrators::RungeKuttaCoefficients::rungeKuttaFehlberg56),
+//                                                             stateDerivativeFunctionCoast, runningTime, newInitialState, zeroMinimumStepSize,
+//                                                             infiniteMaximumStepSize, relativeTolerance, absoluteTolerance );
+
+
+
+//                                              /// Dormand-Prince 8(7) integrator.
+//                                              std::cout<<"You have chosen DOPRIN8(7) as your integration method"<<std::endl;
+//                                              method = "DOPRIN8(7)";
+//                                                 tudat::numerical_integrators::RungeKuttaVariableStepSizeIntegratorXd integratorCoast(
+//                                                             tudat::numerical_integrators::RungeKuttaCoefficients::get(
+//                                                                 tudat::numerical_integrators::RungeKuttaCoefficients::rungeKutta87DormandPrince),
+//                                                             stateDerivativeFunctionCoast, runningTime, newInitialState, zeroMinimumStepSize,
+//                                                             infiniteMaximumStepSize, relativeTolerance, absoluteTolerance );
 
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2043,9 +2064,9 @@ std::cout<<"////////////////////////////////////////////////////////////////// S
 //                                            std::cout<<"(outputVectorSpherical(1)-bodyReferenceRadius) = "<<(outputVectorSpherical(1)-bodyReferenceRadius)<<std::endl;
                                             count++;
 
-                                            std::cout<<"runningTime = "<<runningTime<<std::endl;
-                                            std::cout<<"endTime = "<<endTime<<std::endl;
-                                            std::cout<<"endTime - runningTime = "<<endTime - runningTime<<std::endl;
+//                                            std::cout<<"runningTime = "<<runningTime<<std::endl;
+//                                            std::cout<<"endTime = "<<endTime<<std::endl;
+//                                            std::cout<<"endTime - runningTime = "<<endTime - runningTime<<std::endl;
 
 
                                         }while( !( endTime - runningTime <= std::numeric_limits< double >::epsilon( ) ) &&  !((outputVectorSpherical(1)-bodyReferenceRadius) >= EndAltitude) );

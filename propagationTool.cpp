@@ -276,8 +276,8 @@ int main()
     const int maxOrder =                    inputVectorValues(14);
 //    const int maxOrder = 20;
 
-    const double chosenLocalErrorTolerance = inputVectorValues(15);
-//    const double chosenLocalErrorTolerance = 1e-15;
+//    const double chosenLocalErrorTolerance = inputVectorValues(15);
+    const double chosenLocalErrorTolerance = 1e-15;
 
     const double chosenStepSize =           inputVectorValues(16);
 
