@@ -163,7 +163,7 @@ int main()
 
     std::string nameOfFile; // Declare the name of the file string
     std::string caseName; // Declare the case name used for the file location
-    const std::string currentVariable = "test"; // Delcaare the current variable that is changed
+    const std::string currentVariable = "multiRunAll"; // Delcaare the current variable that is changed
 
     /* List of possible variable names
      *
@@ -179,7 +179,7 @@ int main()
      *  - normalRun
      *  - OriginalTestCaseData
      *  - test              (USE AS DEFAULT!)
-     *
+     *  - multiRunAll
      *
      *
      *
@@ -814,7 +814,7 @@ int main()
 
   //// Normal run ////
 
-    const double numberOfRuns = 1; // These are the actual number of runs that are done
+    const double numberOfRuns = 500; // These are the actual number of runs that are done
 //    const double maxOrder = 20;
 //    const double FlightPathAngleDeg = 90;
 //    const double setEndTime = 2;
@@ -946,14 +946,14 @@ int main()
     /// Storing the output TSI
 
 
-    outputMatrixTSI(run,0) = maxOrder;
+//    outputMatrixTSI(run,0) = maxOrder;
 //    outputMatrixTSI(run,0) = chosenLocalErrorTolerance;
 //    outputMatrixTSI(run,0) = initialAltitude;
 //        outputMatrixTSI(run,0) = initialLatitudeDeg;
 //        outputMatrixTSI(run,0) = FlightPathAngleDeg;
 //        outputMatrixTSI(run,0) = HeadingAngleDeg;
     //    outputMatrixTSI(run,0) = initialGroundVelocity;
-//            outputMatrixTSI(run,0) = run+1;
+            outputMatrixTSI(run,0) = run+1;
 
 //        outputMatrixTSI(run,1) = initialLongitudeDeg;
 
